@@ -32,9 +32,9 @@
 		DC05C8ED1CF08B5C00EB128A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DC05C8F01CF08B5C00EB128A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC05C8F31CF08B5C00EB128A /* refuge_ios.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = refuge_ios.xcdatamodel; sourceTree = "<group>"; };
-		DC05C8F51CF08B5C00EB128A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DC05C8F51CF08B5C00EB128A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Assets.xcassets; sourceTree = "<group>"; };
 		DC05C8F81CF08B5C00EB128A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		DC05C8FA1CF08B5C00EB128A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC05C8FA1CF08B5C00EB128A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		DC05C8FF1CF08B5C00EB128A /* refuge-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "refuge-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC05C9031CF08B5C00EB128A /* refuge_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = refuge_iosTests.swift; sourceTree = "<group>"; };
 		DC05C9051CF08B5C00EB128A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,11 +81,11 @@
 			children = (
 				DC05C8EB1CF08B5C00EB128A /* AppDelegate.swift */,
 				DC05C8ED1CF08B5C00EB128A /* ViewController.swift */,
-				DC05C8EF1CF08B5C00EB128A /* Main.storyboard */,
-				DC05C8F51CF08B5C00EB128A /* Assets.xcassets */,
-				DC05C8F71CF08B5C00EB128A /* LaunchScreen.storyboard */,
-				DC05C8FA1CF08B5C00EB128A /* Info.plist */,
-				DC05C8F21CF08B5C00EB128A /* refuge_ios.xcdatamodeld */,
+				DC05C9151CF0987D00EB128A /* Infrastructure */,
+				DC05C9161CF0987D00EB128A /* Interface Adapters */,
+				DC05C9171CF0987D00EB128A /* Use Cases */,
+				DC05C9141CF0987D00EB128A /* Entities */,
+				DC05C9191CF098BF00EB128A /* Supporting Files */,
 			);
 			path = "refuge-ios";
 			sourceTree = "<group>";
@@ -97,6 +97,86 @@
 				DC05C9051CF08B5C00EB128A /* Info.plist */,
 			);
 			path = "refuge-iosTests";
+			sourceTree = "<group>";
+		};
+		DC05C9141CF0987D00EB128A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		DC05C9151CF0987D00EB128A /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				DC05C91A1CF0992E00EB128A /* Repositories */,
+				DC05C9181CF098A200EB128A /* Resources */,
+				DC05C91B1CF0992E00EB128A /* UI */,
+				DC05C91C1CF0992E00EB128A /* Utilities */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		DC05C9161CF0987D00EB128A /* Interface Adapters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Interface Adapters";
+			sourceTree = "<group>";
+		};
+		DC05C9171CF0987D00EB128A /* Use Cases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Use Cases";
+			sourceTree = "<group>";
+		};
+		DC05C9181CF098A200EB128A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DC05C8EF1CF08B5C00EB128A /* Main.storyboard */,
+				DC05C8F51CF08B5C00EB128A /* Assets.xcassets */,
+				DC05C8F71CF08B5C00EB128A /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DC05C9191CF098BF00EB128A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC05C8F21CF08B5C00EB128A /* refuge_ios.xcdatamodeld */,
+				DC05C8FA1CF08B5C00EB128A /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC05C91A1CF0992E00EB128A /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		DC05C91B1CF0992E00EB128A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				DC05C91D1CF0997A00EB128A /* Features */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		DC05C91C1CF0992E00EB128A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DC05C91D1CF0997A00EB128A /* Features */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Features;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +311,7 @@
 				DC05C8F01CF08B5C00EB128A /* Base */,
 			);
 			name = Main.storyboard;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		DC05C8F71CF08B5C00EB128A /* LaunchScreen.storyboard */ = {
@@ -239,6 +320,7 @@
 				DC05C8F81CF08B5C00EB128A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -394,6 +476,7 @@
 				DC05C90A1CF08B5C00EB128A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DC05C90B1CF08B5C00EB128A /* Build configuration list for PBXNativeTarget "refuge-iosTests" */ = {
 			isa = XCConfigurationList;
@@ -402,6 +485,7 @@
 				DC05C90D1CF08B5C00EB128A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -412,7 +496,8 @@
 				DC05C8F31CF08B5C00EB128A /* refuge_ios.xcdatamodel */,
 			);
 			currentVersion = DC05C8F31CF08B5C00EB128A /* refuge_ios.xcdatamodel */;
-			path = refuge_ios.xcdatamodeld;
+			name = refuge_ios.xcdatamodeld;
+			path = ../refuge_ios.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
