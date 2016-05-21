@@ -27,6 +27,9 @@ internal struct AlamofireWebService: WebService {
     /// Base URL associated with the service.
     let baseURL: String
     
+    /// JSON reading options.
+    let jsonReadingOptions: NSJSONReadingOptions
+    
     /// JSON serializer.
     let jsonSerializer: JSONSerializer
     
@@ -38,24 +41,28 @@ internal struct AlamofireWebService: WebService {
     // MARK: WebService
     
     func GET(path: String, parameters: [String : AnyObject]?, completion: (AnyObject?, NSError?) -> ()) {
-        requestWithMethod(.GET, path: path, parameters: nil, encoding: .JSON, completion: completion)
+        requestWithMethod(.GET, path: path, parameters: parameters, completion: completion)
     }
     
     // MARK: - Instance functions
     
     // MARK: Private instance functions
     
-    private func requestWithMethod(method: Alamofire.Method, path: String, parameters: [String : AnyObject]?, encoding: Alamofire.ParameterEncoding, completion: (AnyObject?, NSError?) -> ()) {
+    private func requestWithMethod(method: Alamofire.Method, path: String, parameters: [String : AnyObject]?, completion: (AnyObject?, NSError?) -> ()) {
         let url = urlConstructor.constructURLWithBase(baseURL, path: path, parameters: parameters)
-        
-        Alamofire.request(method, url, parameters: nil, encoding: encoding, headers: nil).response {
+
+        requestWithMethod(method, url: url, parameters: nil, headers: nil, encoding: .JSON, completion: completion)
+    }
+    
+    private func requestWithMethod(method: Alamofire.Method, url: String, parameters: [String : AnyObject]?, headers: [String : String]?, encoding: Alamofire.ParameterEncoding, completion: (AnyObject?, NSError?) -> ()) {
+        Alamofire.request(method, url, parameters: parameters, encoding: encoding, headers: headers).response {
             (request, response, data, error) in
             
             if let error = error {
                 completion(nil, error)
                 return
             } else {
-                let serializationResult = self.jsonSerializer.serializeDataToJSON(data, readingOptions: .AllowFragments)
+                let serializationResult = self.jsonSerializer.serializeDataToJSON(data, readingOptions: self.jsonReadingOptions)
                 
                 if let error = serializationResult.error {
                     completion(nil, error)
