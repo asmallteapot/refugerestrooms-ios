@@ -31,6 +31,6 @@ internal protocol WebService {
      - parameter parameters: Parameters.
      - parameter completion: Completion with JSON when successful, error otherwise.
      */
-    func GET(path: String, parameters: [String : AnyObject]?, completion: ([String : AnyObject]?, NSError?) -> ())
+    func GET(path: String, parameters: [String : AnyObject]?, completion: (AnyObject?, NSError?) -> ())
     
 }

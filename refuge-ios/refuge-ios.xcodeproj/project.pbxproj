@@ -16,6 +16,8 @@
 		DC05C9041CF08B5C00EB128A /* refuge_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9031CF08B5C00EB128A /* refuge_iosTests.swift */; };
 		DC05C9211CF099C700EB128A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9201CF099C700EB128A /* ViewController.swift */; };
 		DC05C9241CF09FDB00EB128A /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9231CF09FDB00EB128A /* WebService.swift */; };
+		DC05C92C1CF0A6BD00EB128A /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9231CF09FDB00EB128A /* WebService.swift */; };
+		DC05C92E1CF0AA0C00EB128A /* AlamofireWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C92D1CF0AA0C00EB128A /* AlamofireWebService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,7 @@
 		DC05C9051CF08B5C00EB128A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC05C9201CF099C700EB128A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DC05C9231CF09FDB00EB128A /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		DC05C92D1CF0AA0C00EB128A /* AlamofireWebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireWebService.swift; sourceTree = "<group>"; };
 		F7096657E6BA09AD09A2FE71 /* Pods-refuge-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-refuge-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-refuge-ios/Pods-refuge-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				DC05C9221CF09FD200EB128A /* Protocols */,
+				DC05C92D1CF0AA0C00EB128A /* AlamofireWebService.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -377,6 +381,7 @@
 				DC05C8EC1CF08B5C00EB128A /* AppDelegate.swift in Sources */,
 				DC05C9211CF099C700EB128A /* ViewController.swift in Sources */,
 				DC05C9241CF09FDB00EB128A /* WebService.swift in Sources */,
+				DC05C92E1CF0AA0C00EB128A /* AlamofireWebService.swift in Sources */,
 				DC05C8F41CF08B5C00EB128A /* refuge_ios.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,6 +390,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC05C92C1CF0A6BD00EB128A /* WebService.swift in Sources */,
 				DC05C9041CF08B5C00EB128A /* refuge_iosTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

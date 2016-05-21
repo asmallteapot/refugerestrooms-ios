@@ -19,10 +19,22 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var webService: WebService = AlamofireWebService(baseURL: "http://www.refugerestrooms.org:80/api/v1/")
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        webService.GET("restrooms.json?page=1&per_page=5", parameters: nil) {
+            (json, error) in
+            
+            if let error = error {
+                print("ERROR: \(error)")
+                return
+            }
+            
+            print(json)
+        }
     }
 
     override func didReceiveMemoryWarning() {
