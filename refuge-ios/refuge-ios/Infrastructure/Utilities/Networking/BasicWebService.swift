@@ -56,6 +56,26 @@ internal final class BasicWebService: WebService {
     private var currentTask: NSURLSessionDataTask?
     
     // MARK: - Init/Deinit
+
+    /**
+     Creates new instance with provided details. 
+     
+     Defaults session cache type to Disk and JSON reading options to AllowFragments.
+     
+     - parameter baseURL:                  Base URL.
+     - parameter jsonSerializer:           JSON serializer.
+     - parameter networkActivityIndicator: Network activity indicator.
+     - parameter urlConstructor:           URL constructor.
+     */
+    convenience init(baseURL: String, jsonSerializer: JSONSerializer, networkActivityIndicator: NetworkActivityIndicator, urlConstructor: WebServiceURLConstructor) {
+        self.init(baseURL: baseURL,
+                  jsonReadingOptions: .AllowFragments,
+                  jsonSerializer: jsonSerializer,
+                  networkActivityIndicator: networkActivityIndicator,
+                  sessionCacheType: .Disk,
+                  urlConstructor: urlConstructor
+        )
+    }
     
     /**
      Creates new instance with provided details.
