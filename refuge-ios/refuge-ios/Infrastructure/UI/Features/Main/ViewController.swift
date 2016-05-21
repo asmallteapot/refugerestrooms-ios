@@ -20,12 +20,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var webService: WebService = AlamofireWebService(baseURL: "http://www.refugerestrooms.org:80/api/v1/", jsonSerializer: AlamofireJSONSerializer())
+    var webService: WebService = AlamofireWebService(baseURL: "http://www.refugerestrooms.org:80/api/v1/", jsonSerializer: AlamofireJSONSerializer(), parametersConverter: BasicWebServiceParametersConverter())
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webService.GET("restrooms.json?page=1&per_page=5", parameters: nil) {
+        webService.GET("restrooms.json", parameters: ["page" : 1, "per_page" : 5]) {
             (json, error) in
             
             if let error = error {

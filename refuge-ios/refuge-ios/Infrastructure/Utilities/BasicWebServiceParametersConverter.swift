@@ -1,5 +1,5 @@
 //
-//  AlamofireJSONSerializer.swift
+//  BasicWebServiceParametersConverter.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -16,25 +16,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
 import Foundation
 
-/// Alamofire JSON serializer.
-internal struct AlamofireJSONSerializer: JSONSerializer {
+/// Basic web service parameters converter.
+internal struct BasicWebServiceParametersConverter: WebServiceParametersConverter {
     
     // MARK: - Protocol conformance
     
-    // MARK: JSONSerializer
+    // MARK: WebServiceParametersConverter
     
-    func serializeDataToJSON(data: NSData?, readingOptions: NSJSONReadingOptions) -> (json: AnyObject?, error: NSError?) {
-        let serialized = Alamofire.Request.JSONResponseSerializer(options: readingOptions).serializeResponse(nil, nil, data, nil)
-        
-        switch serialized {
-        case .Success(let json):
-            return (json, nil)
-        case .Failure(let error):
-            return (nil, error)
+    func convertParametersToPath(parameters: [String : AnyObject]?, pathRoot: String) -> String {
+        guard let parameters = parameters where parameters.keys.count > 0 else {
+            return pathRoot
         }
+        
+        var path: String = pathRoot
+        
+        for (index, key) in parameters.keys.enumerate() {
+            if index == 0 {
+                path = path + "?"
+            } else {
+                path = path + "&"
+            }
+            
+            path = path + "\(key)=\(parameters[key]!)"
+        }
+        
+        return path
     }
     
 }

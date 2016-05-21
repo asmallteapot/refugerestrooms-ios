@@ -28,19 +28,17 @@ internal struct AlamofireWebService: WebService {
     /// JSON serializer.
     let jsonSerializer: JSONSerializer
     
+    /// Parameters converter.
+    let parametersConverter: WebServiceParametersConverter
+    
     // MARK: - Protocol conformance
     
     // MARK: WebService
     
-    /**
-     Makes a GET request.
-     
-     - parameter path:       Path to resource.
-     - parameter parameters: Parameters.
-     - parameter completion: Completion with JSON when successful, error otherwise.
-     */
     func GET(path: String, parameters: [String : AnyObject]?, completion: (AnyObject?, NSError?) -> ()) {
-        requestWithMethod(.GET, path: path, parameters: parameters, encoding: .JSON, completion: completion)
+        let pathWithParameters = parametersConverter.convertParametersToPath(parameters, pathRoot: path)
+        
+        requestWithMethod(.GET, path: pathWithParameters, parameters: nil, encoding: .JSON, completion: completion)
     }
     
     // MARK: - Instance functions
@@ -50,7 +48,7 @@ internal struct AlamofireWebService: WebService {
     private func requestWithMethod(method: Alamofire.Method, path: String, parameters: [String : AnyObject]?, encoding: Alamofire.ParameterEncoding, completion: (AnyObject?, NSError?) -> ()) {
         let url = urlStringWithBase(baseURL, path: path)
         
-        Alamofire.request(method, url, parameters: parameters, encoding: encoding, headers: nil).response {
+        Alamofire.request(method, url, parameters: nil, encoding: encoding, headers: nil).response {
             (request, response, data, error) in
             
             if let error = error {

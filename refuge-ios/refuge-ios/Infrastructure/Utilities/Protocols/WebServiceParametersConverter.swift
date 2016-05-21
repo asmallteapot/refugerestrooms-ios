@@ -1,5 +1,5 @@
 //
-//  AlamofireJSONSerializer.swift
+//  WebServiceParametersConverter.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -16,25 +16,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
 import Foundation
 
-/// Alamofire JSON serializer.
-internal struct AlamofireJSONSerializer: JSONSerializer {
+/// Converts web service request parameters to path.
+internal protocol WebServiceParametersConverter {
     
-    // MARK: - Protocol conformance
-    
-    // MARK: JSONSerializer
-    
-    func serializeDataToJSON(data: NSData?, readingOptions: NSJSONReadingOptions) -> (json: AnyObject?, error: NSError?) {
-        let serialized = Alamofire.Request.JSONResponseSerializer(options: readingOptions).serializeResponse(nil, nil, data, nil)
-        
-        switch serialized {
-        case .Success(let json):
-            return (json, nil)
-        case .Failure(let error):
-            return (nil, error)
-        }
-    }
+    /**
+     Converts web service request parameters to a path string.
+     
+     e.g. For a path root of 'user' and parameters of '["id" : 1, "summary" : true]',
+     conversion would produce 'user?id=1&summary=true'
+     
+     - parameter parameters: Parameters.
+     - parameter pathRoot:   Path root.
+     
+     - returns: Path with parameters.
+     */
+    func convertParametersToPath(parameters: [String : AnyObject]?, pathRoot: String) -> String
     
 }

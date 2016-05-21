@@ -20,6 +20,8 @@
 		DC05C92E1CF0AA0C00EB128A /* AlamofireWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C92D1CF0AA0C00EB128A /* AlamofireWebService.swift */; };
 		DC05C9301CF0B01200EB128A /* JSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C92F1CF0B01100EB128A /* JSONSerializer.swift */; };
 		DC05C9321CF0B0F600EB128A /* AlamofireJSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9311CF0B0F600EB128A /* AlamofireJSONSerializer.swift */; };
+		DC05C9341CF0B35D00EB128A /* WebServiceParametersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9331CF0B35D00EB128A /* WebServiceParametersConverter.swift */; };
+		DC05C9361CF0B46900EB128A /* BasicWebServiceParametersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9351CF0B46900EB128A /* BasicWebServiceParametersConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		DC05C92D1CF0AA0C00EB128A /* AlamofireWebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireWebService.swift; sourceTree = "<group>"; };
 		DC05C92F1CF0B01100EB128A /* JSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerializer.swift; sourceTree = "<group>"; };
 		DC05C9311CF0B0F600EB128A /* AlamofireJSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireJSONSerializer.swift; sourceTree = "<group>"; };
+		DC05C9331CF0B35D00EB128A /* WebServiceParametersConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceParametersConverter.swift; sourceTree = "<group>"; };
+		DC05C9351CF0B46900EB128A /* BasicWebServiceParametersConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicWebServiceParametersConverter.swift; sourceTree = "<group>"; };
 		F7096657E6BA09AD09A2FE71 /* Pods-refuge-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-refuge-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-refuge-ios/Pods-refuge-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,6 +207,7 @@
 				DC05C9221CF09FD200EB128A /* Protocols */,
 				DC05C9311CF0B0F600EB128A /* AlamofireJSONSerializer.swift */,
 				DC05C92D1CF0AA0C00EB128A /* AlamofireWebService.swift */,
+				DC05C9351CF0B46900EB128A /* BasicWebServiceParametersConverter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 			children = (
 				DC05C92F1CF0B01100EB128A /* JSONSerializer.swift */,
 				DC05C9231CF09FDB00EB128A /* WebService.swift */,
+				DC05C9331CF0B35D00EB128A /* WebServiceParametersConverter.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -385,9 +391,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC05C8EC1CF08B5C00EB128A /* AppDelegate.swift in Sources */,
+				DC05C9341CF0B35D00EB128A /* WebServiceParametersConverter.swift in Sources */,
 				DC05C9321CF0B0F600EB128A /* AlamofireJSONSerializer.swift in Sources */,
 				DC05C9301CF0B01200EB128A /* JSONSerializer.swift in Sources */,
 				DC05C9211CF099C700EB128A /* ViewController.swift in Sources */,
+				DC05C9361CF0B46900EB128A /* BasicWebServiceParametersConverter.swift in Sources */,
 				DC05C9241CF09FDB00EB128A /* WebService.swift in Sources */,
 				DC05C92E1CF0AA0C00EB128A /* AlamofireWebService.swift in Sources */,
 				DC05C8F41CF08B5C00EB128A /* refuge_ios.xcdatamodeld in Sources */,
