@@ -107,6 +107,11 @@ internal final class BasicWebService: WebService {
                 return
             }
             
+            if httpResponse.statusCode == 204 {
+                completion(NSNull(), nil)
+                return
+            }
+            
             guard httpResponse.statusCode == 200 else {
                 let errorDescription = "Web service request completed with unexpected status code: \(httpResponse.statusCode)"
                 let error = NSError(domain: "com.refugerestrooms.refuge-ios.webservice", code: 3, userInfo: [NSLocalizedDescriptionKey : errorDescription])

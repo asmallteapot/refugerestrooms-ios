@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     var webService: WebService = BasicWebService(
         baseURL: "http://www.refugerestrooms.org:80/api/v1/",
         jsonReadingOptions: .AllowFragments,
-        jsonSerializer: AlamofireJSONSerializer(),
+        jsonSerializer: BasicJSONSerializer(),
         sessionCacheType: .Disk,
         urlConstructor: BasicWebServiceURLConstructor(
             parametersConverter: BasicWebServiceParametersConverter()
