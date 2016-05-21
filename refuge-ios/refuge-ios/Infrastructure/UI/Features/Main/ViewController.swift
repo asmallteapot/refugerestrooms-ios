@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         baseURL: "http://www.refugerestrooms.org:80/api/v1/",
         jsonReadingOptions: .AllowFragments,
         jsonSerializer: BasicJSONSerializer(),
+        networkActivityIndicator: BasicNetworkActivityIndicator(),
         sessionCacheType: .Disk,
         urlConstructor: BasicWebServiceURLConstructor(
             parametersConverter: BasicWebServiceParametersConverter()

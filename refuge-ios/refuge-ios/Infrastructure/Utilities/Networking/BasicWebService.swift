@@ -43,6 +43,9 @@ internal final class BasicWebService: WebService {
     
     /// JSON serializer.
     let jsonSerializer: JSONSerializer
+
+    /// Network activity indicator.
+    let networkActivityIndicator: NetworkActivityIndicator
     
     /// URL constructor.
     let urlConstructor: WebServiceURLConstructor
@@ -57,16 +60,18 @@ internal final class BasicWebService: WebService {
     /**
      Creates new instance with provided details.
      
-     - parameter baseURL:            Base URL.
-     - parameter jsonReadingOptions: JSON reading options.
-     - parameter jsonSerializer:     JSON serializer.
-     - parameter sessionCacheType:   Session cache type.
-     - parameter urlConstructor:     URL constructor.
+     - parameter baseURL:                  Base URL.
+     - parameter jsonReadingOptions:       JSON reading options.
+     - parameter jsonSerializer:           JSON serializer.
+     - parameter networkActivityIndicator: Network activity indicator.
+     - parameter sessionCacheType:         Session cache type.
+     - parameter urlConstructor:           URL constructor.
      */
-    init(baseURL: String, jsonReadingOptions: NSJSONReadingOptions, jsonSerializer: JSONSerializer, sessionCacheType: SessionCacheType, urlConstructor: WebServiceURLConstructor) {
+    init(baseURL: String, jsonReadingOptions: NSJSONReadingOptions, jsonSerializer: JSONSerializer, networkActivityIndicator: NetworkActivityIndicator, sessionCacheType: SessionCacheType, urlConstructor: WebServiceURLConstructor) {
         self.baseURL = baseURL
         self.jsonReadingOptions = jsonReadingOptions
         self.jsonSerializer = jsonSerializer
+        self.networkActivityIndicator = networkActivityIndicator
         self.urlConstructor = urlConstructor
         self.session = NSURLSession(configuration: sessionCacheType.sessionConfiguration())
         self.currentTask = nil
@@ -81,6 +86,8 @@ internal final class BasicWebService: WebService {
             currentTask?.cancel()
         }
         
+        networkActivityIndicator.start()
+        
         let urlString = urlConstructor.constructURLWithBase(baseURL, path: path, parameters: parameters)
         
         guard let url = NSURL(string: urlString) else {
@@ -92,7 +99,9 @@ internal final class BasicWebService: WebService {
         }
         
         currentTask = session?.dataTaskWithURL(url) {
-            data, response, error in
+            [weak self] data, response, error in
+            
+            self?.networkActivityIndicator.stop()
             
             if let error = error {
                 completion(nil, error)
@@ -120,13 +129,17 @@ internal final class BasicWebService: WebService {
                 return
             }
             
-            let serializationResult = self.jsonSerializer.serializeDataToJSON(data, readingOptions: self.jsonReadingOptions)
-            
-            if let error = serializationResult.error {
-                completion(nil, error)
-                return
-            } else {
-                completion(serializationResult.json!, nil)
+            if
+                let jsonSerializer = self?.jsonSerializer,
+                let jsonReadingOptions = self?.jsonReadingOptions {
+                let serializationResult = jsonSerializer.serializeDataToJSON(data, readingOptions: jsonReadingOptions)
+                
+                if let error = serializationResult.error {
+                    completion(nil, error)
+                    return
+                } else {
+                    completion(serializationResult.json!, nil)
+                }
             }
         }
         
