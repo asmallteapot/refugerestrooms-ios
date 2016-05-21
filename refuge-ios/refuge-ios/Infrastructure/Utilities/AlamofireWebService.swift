@@ -1,10 +1,20 @@
 //
 //  AlamofireWebService.swift
-//  refuge-ios
 //
-//  Created by Harlan Kellaway on 5/21/16.
-//  Copyright © 2016 Harlan Kellaway. All rights reserved.
+// Copyleft (c) 2016 Refuge Restrooms
 //
+// Refuge is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE
+// Version 3, 19 November 2007
+//
+// This notice shall be included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 import Alamofire
 import Foundation
@@ -14,6 +24,9 @@ internal struct AlamofireWebService: WebService {
 
     /// Base URL associated with the service.
     let baseURL: String
+    
+    /// JSON serializer.
+    let jsonSerializer: JSONSerializer
     
     // MARK: - Protocol conformance
     
@@ -44,14 +57,15 @@ internal struct AlamofireWebService: WebService {
                 completion(nil, error)
                 return
             } else {
-                let jsonResult = Alamofire.Request.JSONResponseSerializer(options: .AllowFragments).serializeResponse(nil, nil, data, nil)
+                let serializationResult = self.jsonSerializer.serializeDataToJSON(data, readingOptions: .AllowFragments)
                 
-                switch jsonResult {
-                case .Success(let json):
-                    completion(json, nil)
-                case .Failure(let error):
+                if let error = serializationResult.error {
                     completion(nil, error)
+                    return
+                } else {
+                    completion(serializationResult.json!, nil)
                 }
+                
             }
         }
     }

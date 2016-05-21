@@ -20,7 +20,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var webService: WebService = AlamofireWebService(baseURL: "http://www.refugerestrooms.org:80/api/v1/")
+    var webService: WebService = AlamofireWebService(baseURL: "http://www.refugerestrooms.org:80/api/v1/", jsonSerializer: AlamofireJSONSerializer())
 
     override func viewDidLoad() {
         super.viewDidLoad()
