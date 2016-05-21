@@ -1,5 +1,5 @@
 //
-//  BasicWebServiceParametersConverter.swift
+//  BasicWebServiceURLConstructor.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -18,31 +18,22 @@
 
 import Foundation
 
-/// Basic web service parameters converter.
-internal struct BasicWebServiceParametersConverter: WebServiceParametersConverter {
+/// Basic web service URL constructor.
+internal struct BasicWebServiceURLConstructor: WebServiceURLConstructor {
+    
+    // MARK: - Properties
+    
+    /// Parameters converter.
+    let parametersConverter: WebServiceParametersConverter
     
     // MARK: - Protocol conformance
     
-    // MARK: WebServiceParametersConverter
+    // MARK: WebServiceURLConstructor
     
-    func convertParametersToPath(parameters: [String : AnyObject], pathRoot: String) -> String {
-        guard parameters.keys.count > 0 else {
-            return pathRoot
-        }
+    func constructURLWithBase(base: String, path: String, parameters: [String : AnyObject]?) -> String {
+        let pathWithParameters = (parameters == nil) ? path : parametersConverter.convertParametersToPath(parameters!, pathRoot: path)
         
-        var path: String = pathRoot
-        
-        for (index, key) in parameters.keys.enumerate() {
-            if index == 0 {
-                path = path + "?"
-            } else {
-                path = path + "&"
-            }
-            
-            path = path + "\(key)=\(parameters[key]!)"
-        }
-        
-        return path
+        return base + pathWithParameters
     }
     
 }

@@ -1,5 +1,5 @@
 //
-//  WebServiceParametersConverter.swift
+//  WebServiceURLConstructor.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -18,20 +18,18 @@
 
 import Foundation
 
-/// Converts web service request parameters to path.
-internal protocol WebServiceParametersConverter {
+/// Constructs URL for use in web service requests.
+internal protocol WebServiceURLConstructor {
     
     /**
-     Converts web service request parameters to a path string.
+     Constructs URL given a base, path, and parameters.
      
-     e.g. For a path root of 'user' and parameters of '["id" : 1, "summary" : true]',
-     conversion would produce 'user?id=1&summary=true'
+     - parameter base: URL base.
+     - parameter path: URL path.
+     - parameter parameters: URL parameters, if any.
      
-     - parameter parameters: Parameters.
-     - parameter pathRoot:   Path root.
-     
-     - returns: Path with parameters.
+     - returns: URL.
      */
-    func convertParametersToPath(parameters: [String : AnyObject], pathRoot: String) -> String
+    func constructURLWithBase(base: String, path: String, parameters: [String : AnyObject]?) -> String
     
 }

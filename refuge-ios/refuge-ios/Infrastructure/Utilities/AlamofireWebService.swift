@@ -21,6 +21,8 @@ import Foundation
 
 /// Alamofire web service.
 internal struct AlamofireWebService: WebService {
+    
+    // MARK: - Properties
 
     /// Base URL associated with the service.
     let baseURL: String
@@ -28,17 +30,15 @@ internal struct AlamofireWebService: WebService {
     /// JSON serializer.
     let jsonSerializer: JSONSerializer
     
-    /// Parameters converter.
-    let parametersConverter: WebServiceParametersConverter
+    /// URL constructor.
+    let urlConstructor: WebServiceURLConstructor
     
     // MARK: - Protocol conformance
     
     // MARK: WebService
     
     func GET(path: String, parameters: [String : AnyObject]?, completion: (AnyObject?, NSError?) -> ()) {
-        let pathWithParameters = parametersConverter.convertParametersToPath(parameters, pathRoot: path)
-        
-        requestWithMethod(.GET, path: pathWithParameters, parameters: nil, encoding: .JSON, completion: completion)
+        requestWithMethod(.GET, path: path, parameters: nil, encoding: .JSON, completion: completion)
     }
     
     // MARK: - Instance functions
@@ -46,7 +46,7 @@ internal struct AlamofireWebService: WebService {
     // MARK: Private instance functions
     
     private func requestWithMethod(method: Alamofire.Method, path: String, parameters: [String : AnyObject]?, encoding: Alamofire.ParameterEncoding, completion: (AnyObject?, NSError?) -> ()) {
-        let url = urlStringWithBase(baseURL, path: path)
+        let url = urlConstructor.constructURLWithBase(baseURL, path: path, parameters: parameters)
         
         Alamofire.request(method, url, parameters: nil, encoding: encoding, headers: nil).response {
             (request, response, data, error) in
@@ -66,10 +66,6 @@ internal struct AlamofireWebService: WebService {
                 
             }
         }
-    }
-    
-    private func urlStringWithBase(base: String, path: String) -> String {
-        return base + path
     }
     
 }
