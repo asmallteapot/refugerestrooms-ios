@@ -14,15 +14,14 @@
 		DC05C8F91CF08B5C00EB128A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC05C8F71CF08B5C00EB128A /* LaunchScreen.storyboard */; };
 		DC05C9041CF08B5C00EB128A /* refuge_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9031CF08B5C00EB128A /* refuge_iosTests.swift */; };
 		DC05C9211CF099C700EB128A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9201CF099C700EB128A /* ViewController.swift */; };
-		DC05C9241CF09FDB00EB128A /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9231CF09FDB00EB128A /* WebService.swift */; };
-		DC05C92C1CF0A6BD00EB128A /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9231CF09FDB00EB128A /* WebService.swift */; };
-		DC05C9301CF0B01200EB128A /* JSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C92F1CF0B01100EB128A /* JSONSerializer.swift */; };
-		DC05C9341CF0B35D00EB128A /* WebServiceParametersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9331CF0B35D00EB128A /* WebServiceParametersConverter.swift */; };
-		DC05C9361CF0B46900EB128A /* BasicWebServiceParametersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9351CF0B46900EB128A /* BasicWebServiceParametersConverter.swift */; };
-		DC05C9381CF0BA2400EB128A /* WebServiceURLConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9371CF0BA2400EB128A /* WebServiceURLConstructor.swift */; };
-		DC05C93A1CF0BA4A00EB128A /* BasicWebServiceURLConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9391CF0BA4A00EB128A /* BasicWebServiceURLConstructor.swift */; };
-		DC05C93C1CF0BE0A00EB128A /* BasicWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C93B1CF0BE0A00EB128A /* BasicWebService.swift */; };
-		DC05C93E1CF0C98200EB128A /* BasicJSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C93D1CF0C98200EB128A /* BasicJSONSerializer.swift */; };
+		DC05C9491CF0CE1600EB128A /* BasicJSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9401CF0CE1600EB128A /* BasicJSONSerializer.swift */; };
+		DC05C94A1CF0CE1600EB128A /* BasicWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9411CF0CE1600EB128A /* BasicWebService.swift */; };
+		DC05C94B1CF0CE1600EB128A /* BasicWebServiceParametersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9421CF0CE1600EB128A /* BasicWebServiceParametersConverter.swift */; };
+		DC05C94C1CF0CE1600EB128A /* BasicWebServiceURLConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9431CF0CE1600EB128A /* BasicWebServiceURLConstructor.swift */; };
+		DC05C94D1CF0CE1600EB128A /* JSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9451CF0CE1600EB128A /* JSONSerializer.swift */; };
+		DC05C94E1CF0CE1600EB128A /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9461CF0CE1600EB128A /* WebService.swift */; };
+		DC05C94F1CF0CE1600EB128A /* WebServiceParametersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9471CF0CE1600EB128A /* WebServiceParametersConverter.swift */; };
+		DC05C9501CF0CE1600EB128A /* WebServiceURLConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9481CF0CE1600EB128A /* WebServiceURLConstructor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,14 +48,14 @@
 		DC05C9031CF08B5C00EB128A /* refuge_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = refuge_iosTests.swift; sourceTree = "<group>"; };
 		DC05C9051CF08B5C00EB128A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC05C9201CF099C700EB128A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DC05C9231CF09FDB00EB128A /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
-		DC05C92F1CF0B01100EB128A /* JSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerializer.swift; sourceTree = "<group>"; };
-		DC05C9331CF0B35D00EB128A /* WebServiceParametersConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceParametersConverter.swift; sourceTree = "<group>"; };
-		DC05C9351CF0B46900EB128A /* BasicWebServiceParametersConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicWebServiceParametersConverter.swift; sourceTree = "<group>"; };
-		DC05C9371CF0BA2400EB128A /* WebServiceURLConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceURLConstructor.swift; sourceTree = "<group>"; };
-		DC05C9391CF0BA4A00EB128A /* BasicWebServiceURLConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicWebServiceURLConstructor.swift; sourceTree = "<group>"; };
-		DC05C93B1CF0BE0A00EB128A /* BasicWebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicWebService.swift; sourceTree = "<group>"; };
-		DC05C93D1CF0C98200EB128A /* BasicJSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicJSONSerializer.swift; sourceTree = "<group>"; };
+		DC05C9401CF0CE1600EB128A /* BasicJSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicJSONSerializer.swift; sourceTree = "<group>"; };
+		DC05C9411CF0CE1600EB128A /* BasicWebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicWebService.swift; sourceTree = "<group>"; };
+		DC05C9421CF0CE1600EB128A /* BasicWebServiceParametersConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicWebServiceParametersConverter.swift; sourceTree = "<group>"; };
+		DC05C9431CF0CE1600EB128A /* BasicWebServiceURLConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicWebServiceURLConstructor.swift; sourceTree = "<group>"; };
+		DC05C9451CF0CE1600EB128A /* JSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerializer.swift; sourceTree = "<group>"; };
+		DC05C9461CF0CE1600EB128A /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		DC05C9471CF0CE1600EB128A /* WebServiceParametersConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceParametersConverter.swift; sourceTree = "<group>"; };
+		DC05C9481CF0CE1600EB128A /* WebServiceURLConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceURLConstructor.swift; sourceTree = "<group>"; };
 		F7096657E6BA09AD09A2FE71 /* Pods-refuge-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-refuge-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-refuge-ios/Pods-refuge-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,11 +205,7 @@
 		DC05C91C1CF0992E00EB128A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				DC05C9221CF09FD200EB128A /* Protocols */,
-				DC05C93D1CF0C98200EB128A /* BasicJSONSerializer.swift */,
-				DC05C93B1CF0BE0A00EB128A /* BasicWebService.swift */,
-				DC05C9351CF0B46900EB128A /* BasicWebServiceParametersConverter.swift */,
-				DC05C9391CF0BA4A00EB128A /* BasicWebServiceURLConstructor.swift */,
+				DC05C93F1CF0CE1600EB128A /* Networking */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -231,13 +226,25 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		DC05C9221CF09FD200EB128A /* Protocols */ = {
+		DC05C93F1CF0CE1600EB128A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				DC05C92F1CF0B01100EB128A /* JSONSerializer.swift */,
-				DC05C9231CF09FDB00EB128A /* WebService.swift */,
-				DC05C9331CF0B35D00EB128A /* WebServiceParametersConverter.swift */,
-				DC05C9371CF0BA2400EB128A /* WebServiceURLConstructor.swift */,
+				DC05C9441CF0CE1600EB128A /* Protocols */,
+				DC05C9401CF0CE1600EB128A /* BasicJSONSerializer.swift */,
+				DC05C9411CF0CE1600EB128A /* BasicWebService.swift */,
+				DC05C9421CF0CE1600EB128A /* BasicWebServiceParametersConverter.swift */,
+				DC05C9431CF0CE1600EB128A /* BasicWebServiceURLConstructor.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		DC05C9441CF0CE1600EB128A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DC05C9451CF0CE1600EB128A /* JSONSerializer.swift */,
+				DC05C9461CF0CE1600EB128A /* WebService.swift */,
+				DC05C9471CF0CE1600EB128A /* WebServiceParametersConverter.swift */,
+				DC05C9481CF0CE1600EB128A /* WebServiceURLConstructor.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -343,16 +350,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC05C94E1CF0CE1600EB128A /* WebService.swift in Sources */,
 				DC05C8EC1CF08B5C00EB128A /* AppDelegate.swift in Sources */,
-				DC05C93C1CF0BE0A00EB128A /* BasicWebService.swift in Sources */,
-				DC05C93E1CF0C98200EB128A /* BasicJSONSerializer.swift in Sources */,
-				DC05C9381CF0BA2400EB128A /* WebServiceURLConstructor.swift in Sources */,
-				DC05C9341CF0B35D00EB128A /* WebServiceParametersConverter.swift in Sources */,
-				DC05C9301CF0B01200EB128A /* JSONSerializer.swift in Sources */,
+				DC05C94C1CF0CE1600EB128A /* BasicWebServiceURLConstructor.swift in Sources */,
 				DC05C9211CF099C700EB128A /* ViewController.swift in Sources */,
-				DC05C9361CF0B46900EB128A /* BasicWebServiceParametersConverter.swift in Sources */,
-				DC05C9241CF09FDB00EB128A /* WebService.swift in Sources */,
-				DC05C93A1CF0BA4A00EB128A /* BasicWebServiceURLConstructor.swift in Sources */,
+				DC05C94D1CF0CE1600EB128A /* JSONSerializer.swift in Sources */,
+				DC05C94F1CF0CE1600EB128A /* WebServiceParametersConverter.swift in Sources */,
+				DC05C9501CF0CE1600EB128A /* WebServiceURLConstructor.swift in Sources */,
+				DC05C94B1CF0CE1600EB128A /* BasicWebServiceParametersConverter.swift in Sources */,
+				DC05C94A1CF0CE1600EB128A /* BasicWebService.swift in Sources */,
+				DC05C9491CF0CE1600EB128A /* BasicJSONSerializer.swift in Sources */,
 				DC05C8F41CF08B5C00EB128A /* refuge_ios.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,7 +368,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC05C92C1CF0A6BD00EB128A /* WebService.swift in Sources */,
 				DC05C9041CF08B5C00EB128A /* refuge_iosTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
