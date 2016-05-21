@@ -116,8 +116,6 @@ internal final class BasicWebService: WebService {
             currentTask?.cancel()
         }
         
-        networkActivityIndicator.start()
-        
         let urlString = urlConstructor.constructURLWithBase(baseURL, path: path, parameters: parameters)
         
         guard let url = NSURL(string: urlString) else {
@@ -127,6 +125,8 @@ internal final class BasicWebService: WebService {
             completion(nil, error)
             return
         }
+        
+        networkActivityIndicator.start()
         
         currentTask = session?.dataTaskWithURL(url) {
             [weak self] data, response, error in
