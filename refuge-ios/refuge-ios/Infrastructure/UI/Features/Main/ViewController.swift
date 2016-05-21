@@ -20,8 +20,16 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var webService: WebService = AlamofireWebService(baseURL: "http://www.refugerestrooms.org:80/api/v1/", jsonReadingOptions: .AllowFragments, jsonSerializer: AlamofireJSONSerializer(), urlConstructor: BasicWebServiceURLConstructor(parametersConverter: BasicWebServiceParametersConverter()))
-
+    var webService: WebService = BasicWebService(
+        baseURL: "http://www.refugerestrooms.org:80/api/v1/",
+        jsonReadingOptions: .AllowFragments,
+        jsonSerializer: AlamofireJSONSerializer(),
+        sessionCacheType: .Disk,
+        urlConstructor: BasicWebServiceURLConstructor(
+            parametersConverter: BasicWebServiceParametersConverter()
+        )
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
