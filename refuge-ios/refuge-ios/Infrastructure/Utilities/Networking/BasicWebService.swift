@@ -180,11 +180,11 @@ internal final class BasicWebService: WebService {
                 let jsonReadingOptions = self?.jsonReadingOptions {
                 let serializationResult = jsonSerializer.serializeDataToJSON(data, readingOptions: jsonReadingOptions)
                 
-                if let error = serializationResult.error {
-                    completion(nil, error)
-                    return
-                } else {
-                    completion(serializationResult.json!, nil)
+                switch serializationResult {
+                case .Success(let json):
+                    completion(json, nil)
+                case .Failure(let error):
+                    completion(nil, error as NSError)
                 }
             }
         }

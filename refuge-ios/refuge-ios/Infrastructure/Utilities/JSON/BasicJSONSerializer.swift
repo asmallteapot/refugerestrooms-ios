@@ -26,12 +26,12 @@ internal struct BasicJSONSerializer: JSONSerializer {
     
     // MARK: JSONSerializer
     
-    func serializeDataToJSON(data: NSData?, readingOptions: NSJSONReadingOptions) -> (json: AnyObject?, error: NSError?) {
+    func serializeDataToJSON(data: NSData?, readingOptions: NSJSONReadingOptions) -> Result<JSON> {
         guard let data = data else {
             let errorDescription = "JSON serialization failed with nil or zero length input data."
             let error = NSError(domain: "com.refugerestrooms.refuge-ios.jsonserializer", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])
             
-            return (nil, error)
+            return Result(error: error)
         }
         
         var json: AnyObject? = nil
@@ -39,17 +39,17 @@ internal struct BasicJSONSerializer: JSONSerializer {
         do {
             try json = NSJSONSerialization.JSONObjectWithData(data, options: readingOptions)
         } catch {
-            return (nil, error as NSError)
+            return Result(error: error as NSError)
         }
         
         guard let j = json else {
             let errorDescription = "JSON serialization failed but no error indicated."
             let error = NSError(domain: "com.refugerestrooms.refuge-ios.jsonserializer", code: 2, userInfo: [NSLocalizedDescriptionKey : errorDescription])
             
-            return (nil, error)
+            return Result(error: error)
         }
         
-        return (j, nil)
+        return Result(value: j)
     }
     
 }
