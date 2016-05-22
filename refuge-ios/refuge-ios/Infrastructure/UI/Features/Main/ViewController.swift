@@ -29,10 +29,11 @@ class ViewController: UIViewController {
         restroomRepository.fetchLatestRestrooms(5) {
             result in
             
-            switch result {
-            case .Success(let restrooms):
+            do {
+                let restrooms = try result.resolve()
+                
                 print(restrooms.map { $0.name })
-            case .Failure(let error):
+            } catch {
                 print("ERROR: \(error)")
             }
         }

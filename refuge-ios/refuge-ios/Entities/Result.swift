@@ -90,4 +90,20 @@ internal enum Result<T> {
         }
     }
     
+    // Return the value if it's a .Success or throw the error if it's a .Failure
+    
+    /**
+     Returns the value if Success, otherwise throws the error.
+     
+     - returns: Value when successful, throws error otherwise.
+     */
+    func resolve() throws -> T {
+        switch self {
+        case Result.Success(let value):
+            return value
+        case Result.Failure(let error):
+            throw error
+        }
+    }
+    
 }
