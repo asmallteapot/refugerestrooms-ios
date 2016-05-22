@@ -20,7 +20,19 @@
 import UIKit
 
 /// Assembles objects used in Infrastructure layer.
-internal protocol InfrastructureAssembly: UIAssembly, UtilityAssembly { }
+internal protocol InfrastructureAssembly: RepositoryAssembly, UIAssembly, UtilityAssembly { }
+
+/// Assembles repository objects.
+internal protocol RepositoryAssembly {
+    
+    /**
+     Restroom repository.
+     
+     - returns: Restroom repository.
+     */
+    func restroomRepository() -> RestroomRepository
+    
+}
 
 /// Asesmbles objects related to the UI.
 internal protocol UIAssembly: ViewControllerAssembly {
@@ -51,8 +63,15 @@ internal protocol ViewControllerAssembly {
     
 }
 
-/// Assembles objects used as utilities.
+/// Assembles utility objects.
 internal protocol UtilityAssembly {
+    
+    /**
+     JSON parser.
+     
+     - returns: JSON parser.
+     */
+    func jsonParser() -> JSONParser
     
     /**
      JSON serializer.
@@ -90,17 +109,30 @@ extension AppAssembly {
     
     // MARK: - Protocol conformance
     
+    // MARK: RepositoryAssembly
+    
+    func restroomRepository() -> RestroomRepository {
+        return RefugeRestroomRepository(
+            jsonParser: jsonParser(),
+            webService: webService(baseURL: "http://www.refugerestrooms.org:80/api/v1/")
+        )
+    }
+    
     // MARK: UIAssembly
     
     func viewController() -> ViewController {
         let viewController = UIStoryboard.instantiateViewControllerOfType(ViewController)
         
-        viewController.webService = webService(baseURL: "http://www.refugerestrooms.org:80/api/v1/")
+        viewController.restroomRepository = restroomRepository()
         
         return viewController
     }
     
     // MARK: UtilityAssembly
+    
+    func jsonParser() -> JSONParser {
+        return BasicJSONParser()
+    }
     
     func jsonSerializer() -> JSONSerializer {
         return BasicJSONSerializer()

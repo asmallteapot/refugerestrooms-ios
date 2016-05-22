@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RefugeRestroomRepository.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -17,43 +17,41 @@
 // THE SOFTWARE.
 //
 
-import UIKit
+import Foundation
 
-class ViewController: UIViewController {
+/// Restroom repository hosted online by the REFUGE project.
+internal struct RefugeRestroomRepository: RestroomRepository {
     
-    var restroomRepository: RestroomRepository!
+    // MARK: - Properties
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        restroomRepository.fetchLatestRestrooms(5) {
-            (restrooms, error) in
+    /// JSON parser.
+    let jsonParser: JSONParser
+    
+    /// Web service.
+    let webService: WebService
+    
+    // MARK: - Protocol conformance
+    
+    // MARK: RestroomRepository
+    
+    func fetchLatestRestrooms(cap: Int, completion: ([Restroom]?, NSError?) -> ()) {
+        webService.GET("restrooms.json", parameters: ["page" : 1, "per_page" : cap]) {
+            (json, error) in
             
             if let error = error {
                 print("ERROR: \(error)")
                 return
             }
             
-            print(restrooms!.map { $0.name })
+            let jsonParserResult = self.jsonParser.restroomsFromJSON(json!)
+            
+            if let parserError = jsonParserResult.error {
+                completion(nil, parserError)
+                return
+            }
+            
+            completion(jsonParserResult.restrooms, nil)
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
-}
-
-// MARK: - Protocol conformance
-
-// MARK: StoryboardInstantiable
-
-extension ViewController: StoryboardInstantiable {
-    
-    static var parentStoryboard: UIStoryboard {
-        return UIStoryboard.mainStoryboard()
     }
     
 }
