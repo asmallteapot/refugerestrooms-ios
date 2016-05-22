@@ -15,6 +15,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+//
 
 import UIKit
 import CoreData
@@ -22,13 +23,15 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    /// UI assembly.
+    var uiAssembly: UIAssembly = AppAssembly()
+    
+    /// Root window of appplication.
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let assembly = AppAssembly()
         
-        window?.rootViewController = assembly.viewController()
+        window?.rootViewController = uiAssembly.viewController()
         window?.makeKeyAndVisible()
         
         return true
