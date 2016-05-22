@@ -15,6 +15,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+//
 
 import Foundation
 
@@ -76,6 +77,8 @@ internal final class BasicWebService: WebService {
      - parameter jsonSerializer:           JSON serializer.
      - parameter networkActivityIndicator: Network activity indicator.
      - parameter urlConstructor:           URL constructor.
+     
+     - returns: New instance.
      */
     convenience init(baseURL: String, jsonSerializer: JSONSerializer, networkActivityIndicator: NetworkActivityIndicator, urlConstructor: WebServiceURLConstructor) {
         self.init(baseURL: baseURL,
@@ -96,6 +99,8 @@ internal final class BasicWebService: WebService {
      - parameter networkActivityIndicator: Network activity indicator.
      - parameter sessionCacheType:         Session cache type.
      - parameter urlConstructor:           URL constructor.
+     
+     - returns: New instance.
      */
     init(baseURL: String, jsonReadingOptions: NSJSONReadingOptions, jsonSerializer: JSONSerializer, networkActivityIndicator: NetworkActivityIndicator, sessionCacheType: SessionCacheType, urlConstructor: WebServiceURLConstructor) {
         self.baseURL = baseURL
