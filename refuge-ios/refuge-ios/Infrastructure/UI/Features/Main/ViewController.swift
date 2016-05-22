@@ -46,3 +46,14 @@ class ViewController: UIViewController {
 
 }
 
+// MARK: - Protocol conformance
+
+// MARK: StoryboardInstantiable
+
+extension ViewController: StoryboardInstantiable {
+    
+    static var parentStoryboard: UIStoryboard {
+        return UIStoryboard.mainStoryboard()
+    }
+    
+}

@@ -23,7 +23,24 @@ import UIKit
 internal protocol InfrastructureAssembly: UIAssembly, UtilityAssembly { }
 
 /// Asesmbles objects related to the UI.
-internal protocol UIAssembly {
+internal protocol UIAssembly: ViewControllerAssembly {
+    
+}
+
+/// Assembles Storyboard objects.
+internal protocol StoryboardAssembly {
+    
+    /**
+     Main storyboard.
+     
+     - returns: Storyboard.
+     */
+    static func mainStoryboard() -> UIStoryboard
+    
+}
+
+/// Assembles View Controller objects.
+internal protocol ViewControllerAssembly {
     
     /**
      View controller.
@@ -76,7 +93,7 @@ extension AppAssembly {
     // MARK: UIAssembly
     
     func viewController() -> ViewController {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ViewController") as! ViewController
+        let viewController = UIStoryboard.instantiateViewControllerOfType(ViewController)
         
         viewController.webService = webService(baseURL: "http://www.refugerestrooms.org:80/api/v1/")
         

@@ -1,5 +1,5 @@
 //
-//  WebServiceParametersConverter.swift
+//  StoryboardInstantiable.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -17,24 +17,24 @@
 // THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
-/// Converts web service request parameters to path.
-internal protocol WebServiceParametersConverter {
+/// Indicates a UI element that can be instantiated from a Storyboard.
+internal protocol StoryboardInstantiable: class {
     
-    /**
-     Converts web service request parameters to a path string.
-     
-     e.g. For a path root of 'user' and parameters of '["id" : 1, "summary" : true]',
-     conversion would produce 'user?id=1&summary=true'
-     
-     - warning: Order of parameters in path string is not guaranteed.
-     
-     - parameter parameters: Parameters.
-     - parameter pathRoot:   Path root.
-     
-     - returns: Path with parameters.
-     */
-    func convertParametersToPath(parameters: [String : AnyObject], pathRoot: String) -> String
+    /// Identifier for UI element
+    static var storyboardIdentifier: String { get }
+    
+    /// Storyboard where element lives.
+    static var parentStoryboard: UIStoryboard { get }
+    
+}
+
+extension StoryboardInstantiable {
+    
+    /// Returns the name of class as default storyboard identifier.
+    static var storyboardIdentifier: String {
+        return String(self)
+    }
     
 }
