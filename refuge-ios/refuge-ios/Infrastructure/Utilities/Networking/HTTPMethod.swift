@@ -1,5 +1,5 @@
 //
-//  WebService.swift
+//  HTTPMethod.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -19,18 +19,14 @@
 
 import Foundation
 
-/// Web service that facilitates communication with entities on the web that return JSON.
-internal protocol WebService {
+/**
+ HTTP method definitions.
+ 
+ See https://tools.ietf.org/html/rfc7231#section-4.3
+ */
+internal enum HTTPMethod {
     
-    /// Base URL associated with the service.
-    var baseURL: String { get }
-    
-    /**
-     Executes a web service request.
-     
-     - parameter request:    Request.
-     - parameter completion: Completion with JSON when successful, error otherwise.
-     */
-    func executeRequest(request: WebServiceRequest, completion: (JSON?, NSError?) -> ())
+    /// GET.
+    case GET
     
 }

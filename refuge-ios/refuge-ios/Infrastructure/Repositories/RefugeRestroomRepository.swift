@@ -19,6 +19,7 @@
 
 import Foundation
 
+
 /// Restroom repository hosted online by the REFUGE project.
 internal struct RefugeRestroomRepository: RestroomRepository {
     
@@ -30,12 +31,34 @@ internal struct RefugeRestroomRepository: RestroomRepository {
     /// Web service.
     let webService: WebService
     
+    /// Web service request assembly.
+    weak var webServiceRequestAssembly: WebServiceRequestAssembly!
+    
+    // MARK: - Init/Deinit
+    
+    /**
+     Creates new instance with provided details.
+     
+     - parameter jsonParser:                JSON parser.
+     - parameter webService:                Web service.
+     - parameter webServiceRequestAssembly: Web service request assembly.
+     
+     - returns: New instance.
+     */
+    init(jsonParser: JSONParser, webService: WebService, webServiceRequestAssembly: WebServiceRequestAssembly) {
+        self.jsonParser = jsonParser
+        self.webService = webService
+        self.webServiceRequestAssembly = webServiceRequestAssembly
+    }
+    
     // MARK: - Protocol conformance
     
     // MARK: RestroomRepository
     
     func fetchLatestRestrooms(cap: Int, completion: ([Restroom]?, NSError?) -> ()) {
-        webService.GET("restrooms.json", parameters: ["page" : 1, "per_page" : cap]) {
+        let request = webServiceRequestAssembly.fetchLatestRestroomsRequest(cap: cap)
+        
+        webService.executeRequest(request) {
             (json, error) in
             
             if let error = error {

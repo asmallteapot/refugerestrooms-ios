@@ -20,6 +20,6 @@
 import Foundation
 
 /// Assembles objects used by application.
-internal struct AppAssembly: InfrastructureAssembly {
+internal final class AppAssembly: InfrastructureAssembly {
 
 }

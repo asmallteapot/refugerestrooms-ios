@@ -1,5 +1,5 @@
 //
-//  WebService.swift
+//  WebServiceRequest.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -19,18 +19,16 @@
 
 import Foundation
 
-/// Web service that facilitates communication with entities on the web that return JSON.
-internal protocol WebService {
+/// Data object defining a web service request.
+internal protocol WebServiceRequest {
     
-    /// Base URL associated with the service.
-    var baseURL: String { get }
+    /// HTTP method.
+    var method: HTTPMethod { get }
     
-    /**
-     Executes a web service request.
-     
-     - parameter request:    Request.
-     - parameter completion: Completion with JSON when successful, error otherwise.
-     */
-    func executeRequest(request: WebServiceRequest, completion: (JSON?, NSError?) -> ())
+    /// Path.
+    var path: String { get }
+    
+    /// Parameters.
+    var parameters: [String : AnyObject]? { get }
     
 }

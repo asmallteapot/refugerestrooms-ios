@@ -64,7 +64,7 @@ internal protocol ViewControllerAssembly {
 }
 
 /// Assembles utility objects.
-internal protocol UtilityAssembly {
+internal protocol UtilityAssembly: WebServiceRequestAssembly {
     
     /**
      JSON parser.
@@ -105,20 +105,36 @@ internal protocol UtilityAssembly {
     
 }
 
+/// Assembles web service requests.
+internal protocol WebServiceRequestAssembly: class {
+    
+    /**
+     Web service request to fetch latest restrooms.
+     
+     - parameter cap: Maximum number of restrooms to fetch.
+     
+     - returns: Web service request.
+     */
+    func fetchLatestRestroomsRequest(cap cap: Int) -> WebServiceRequest
+    
+}
+
+
 extension AppAssembly {
     
-    // MARK: - Protocol conformance
-    
-    // MARK: RepositoryAssembly
+    // MARK: - RepositoryAssembly
     
     func restroomRepository() -> RestroomRepository {
         return RefugeRestroomRepository(
             jsonParser: jsonParser(),
-            webService: webService(baseURL: "http://www.refugerestrooms.org:80/api/v1/")
+            webService: webService(baseURL: "http://www.refugerestrooms.org:80/api/v1/"),
+            webServiceRequestAssembly: self
         )
     }
     
-    // MARK: UIAssembly
+    // MARK: - UIAssembly
+    
+    // MARK: ViewControllerAssembly
     
     func viewController() -> ViewController {
         let viewController = UIStoryboard.instantiateViewControllerOfType(ViewController)
@@ -128,7 +144,7 @@ extension AppAssembly {
         return viewController
     }
     
-    // MARK: UtilityAssembly
+    // MARK: - UtilityAssembly
     
     func jsonParser() -> JSONParser {
         return BasicJSONParser()
@@ -153,6 +169,16 @@ extension AppAssembly {
     
     func webServiceURLConstructor() -> WebServiceURLConstructor {
         return BasicWebServiceURLConstructor(parametersConverter: webServiceParametersConverter())
+    }
+    
+    // MARK: WebServiceRequestAssembly
+    
+    func fetchLatestRestroomsRequest(cap cap: Int) -> WebServiceRequest {
+        return BasicWebServiceRequest(
+            method: .GET,
+            path: "restrooms.json",
+            parameters: ["page" : 1, "per_page" : cap]
+        )
     }
     
     // MARK: - Private
