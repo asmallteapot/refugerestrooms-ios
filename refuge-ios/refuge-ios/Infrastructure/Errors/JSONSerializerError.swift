@@ -1,5 +1,5 @@
 //
-//  JSONParserError.swift
+//  JSONSerializerError.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -16,16 +16,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
+
 import Foundation
 
-/// JSON parser error.
-enum JSONParserError: ErrorType {
+/// JSON serializer error.
+enum JSONSerializerError: ErrorType {
     
-    /// Invalid value found while parsing.
-    case InvalidValue
+    /// Data was nil or zero in length.
+    case NilOrZeroLengthData
     
-    /// JSON is not in expected format.
-    case UnexpectedFormat
+    /// Serialization failed but no error was indicated.
+    case SerializationFailedWithNoError
     
 }
 
@@ -33,27 +34,27 @@ enum JSONParserError: ErrorType {
 
 // MARK: CustomErrorConvertible
 
-extension JSONParserError: CustomErrorConvertible {
+extension JSONSerializerError: CustomErrorConvertible {
     
     var code: Int {
         switch self {
-        case .InvalidValue:
+        case .NilOrZeroLengthData:
             return 1
-        case .UnexpectedFormat:
+        case .SerializationFailedWithNoError:
             return 2
         }
     }
     
     var subDomain: String {
-        return "jsonparser"
+        return "jsonserializer"
     }
     
     var failureReason: String {
         switch self {
-        case .InvalidValue:
-            return "Invalid value found in JSON."
-        case .UnexpectedFormat:
-            return "Invalid JSON format."
+        case .NilOrZeroLengthData:
+            return "JSON serialization failed with nil or zero length input data."
+        case .SerializationFailedWithNoError:
+            return "JSON serialization failed but no error indicated."
         }
     }
     
