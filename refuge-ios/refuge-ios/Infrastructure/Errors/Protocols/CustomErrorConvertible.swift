@@ -51,7 +51,7 @@ extension CustomErrorConvertible {
         let bundleIdentifier = NSBundle.mainBundle().bundleIdentifier
         
         return NSError(
-            domain: "\(bundleIdentifier).\(subDomain)",
+            domain: "\(bundleIdentifier!).\(subDomain)",
             code: code,
             userInfo: [NSLocalizedDescriptionKey : failureReason]
         )

@@ -27,11 +27,27 @@ internal struct BasicJSONParser: JSONParser {
     // MARK: JSONParser
     
     func restroomsFromJSON(json: JSON) -> Result<[Restroom]> {
+        return Result(value: json)
+            .flatMap(ensureArray)
+            .flatMap(parseRestrooms)
+    }
+    
+    // MARK: - Instance functions
+    
+    // MARK: Private instance functions
+    
+    private func ensureArray(json: JSON) -> Result<[[String : AnyObject]]> {
         return Result {
             guard case .Array(let jsonArray) = json else {
                 throw JSONParserError.UnexpectedFormat
             }
             
+            return jsonArray
+        }
+    }
+    
+    private func parseRestrooms(jsonArray: [[String : AnyObject]]) -> Result<[Restroom]> {
+        return Result {
             var restrooms: [Restroom] = []
             
             for json in jsonArray {
@@ -43,7 +59,7 @@ internal struct BasicJSONParser: JSONParser {
                 
                 restrooms.append(restroom)
             }
-            
+
             return restrooms
         }
     }
