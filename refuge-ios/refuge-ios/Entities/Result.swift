@@ -26,8 +26,13 @@ internal enum Result<T> {
     typealias Value = T
     typealias Error = ErrorType
     
+    /// Success with value.
     case Success(Value)
+    
+    /// Failure with error.
     case Failure(Error)
+    
+    // MARK: - Init/Deinit
     
     /**
      Initializes with specified value.
@@ -49,6 +54,40 @@ internal enum Result<T> {
      */
     init(error: Error) {
         self = .Failure(error)
+    }
+    
+    // MARK: - Instance functions
+    
+    /**
+     Flat map transform.
+     
+     - parameter f: Transform function.
+     
+     - returns: New Result created from appling function to original Result value.
+     */
+    func flatMap<U>(f: T -> Result<U>) -> Result<U> {
+        switch self {
+        case .Success(let t):
+            return f(t)
+        case .Failure(let err):
+            return .Failure(err)
+        }
+    }
+    
+    /**
+     Map transform.
+     
+     - parameter f: Transform function.
+     
+     - returns: New Result created from applying function to original Result value.
+     */
+    func map<U>(f: T -> U) -> Result<U> {
+        switch self {
+        case .Success(let t):
+            return .Success(f(t))
+        case .Failure(let err):
+            return .Failure(err)
+        }
     }
     
 }
