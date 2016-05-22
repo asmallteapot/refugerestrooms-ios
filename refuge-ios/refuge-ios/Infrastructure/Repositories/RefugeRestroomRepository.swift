@@ -68,12 +68,7 @@ internal struct RefugeRestroomRepository: RestroomRepository {
             
             let jsonParserResult = self.jsonParser.restroomsFromJSON(json!)
             
-            if let parserError = jsonParserResult.error {
-                completion(Result(error: parserError))
-                return
-            }
-            
-            completion(Result(value: jsonParserResult.restrooms!))
+            completion(jsonParserResult)
         }
     }
     

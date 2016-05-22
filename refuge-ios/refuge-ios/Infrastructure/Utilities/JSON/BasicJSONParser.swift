@@ -26,12 +26,12 @@ internal struct BasicJSONParser: JSONParser {
     
     // MARK: JSONParser
     
-    func restroomsFromJSON(json: AnyObject) -> (restrooms: [Restroom]?, error: NSError?) {
+    func restroomsFromJSON(json: JSON) -> Result<[Restroom]> {
         guard let jsonArray = json as? [[String : AnyObject]] else {
             let errorDescription = "Cannot parse JSON."
             let error = NSError(domain: "com.refugerestrooms.refuge-ios.jsonparser", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])
             
-            return (nil, error)
+            return Result(error: error)
         }
         
         var restrooms: [Restroom] = []
@@ -41,7 +41,7 @@ internal struct BasicJSONParser: JSONParser {
                 let errorDescription = "Cannot parse JSON."
                 let error = NSError(domain: "com.refugerestrooms.refuge-ios.jsonparser", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])
                 
-                return (nil, error)
+                return Result(error: error)
             }
             
             let restroom = Restroom(name: name)
@@ -49,7 +49,7 @@ internal struct BasicJSONParser: JSONParser {
             restrooms.append(restroom)
         }
         
-        return (restrooms, nil)
+        return Result(value: restrooms)
     }
     
 }

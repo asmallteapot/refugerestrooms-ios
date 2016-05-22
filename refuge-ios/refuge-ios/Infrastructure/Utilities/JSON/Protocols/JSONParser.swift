@@ -29,6 +29,6 @@ internal protocol JSONParser {
      
      - returns: Result with restrooms when successful, error otherwise.
      */
-    func restroomsFromJSON(json: AnyObject) -> (restrooms: [Restroom]?, error: NSError?)
+    func restroomsFromJSON(json: JSON) -> Result<[Restroom]>
     
 }
