@@ -1,5 +1,5 @@
 //
-//  JSONParserError.swift
+//  RestroomRepositoryError.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -19,14 +19,11 @@
 
 import Foundation
 
-/// JSON parser error.
-internal enum JSONParserError: ErrorType {
+/// Restroom repository error.
+internal enum RestroomRepositoryError: ErrorType {
     
-    /// Invalid value found while parsing.
-    case InvalidValue
-    
-    /// JSON is not in expected format.
-    case UnexpectedFormat
+    /// Web request returned invalid data.
+    case InvalidDataFromWebRequest
     
 }
 
@@ -34,27 +31,23 @@ internal enum JSONParserError: ErrorType {
 
 // MARK: CustomErrorConvertible
 
-extension JSONParserError: CustomErrorConvertible {
+extension RestroomRepositoryError: CustomErrorConvertible {
     
     var code: Int {
         switch self {
-        case .InvalidValue:
+        case .InvalidDataFromWebRequest:
             return 1
-        case .UnexpectedFormat:
-            return 2
         }
     }
     
     var subDomain: String {
-        return "jsonparser"
+        return "restroomrepository"
     }
     
     var failureReason: String {
         switch self {
-        case .InvalidValue:
-            return "Invalid value found in JSON."
-        case .UnexpectedFormat:
-            return "Invalid JSON format."
+        case .InvalidDataFromWebRequest:
+            return "Invalid data retrieved from web request."
         }
     }
     

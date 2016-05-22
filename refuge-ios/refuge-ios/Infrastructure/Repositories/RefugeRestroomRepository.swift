@@ -69,10 +69,7 @@ internal struct RefugeRestroomRepository: RestroomRepository {
                 }
                 
                 guard let json = JSON(value: value) else {
-                    let errorDescription = "Invalid data retrieved from web request."
-                    let error = NSError(domain: "com.refugerestrooms.refuge-ios.restroomrepository", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])
-                    
-                    completion(Result(error: error))
+                    completion(Result(error: RestroomRepositoryError.InvalidDataFromWebRequest))
                     return
                 }
                 
