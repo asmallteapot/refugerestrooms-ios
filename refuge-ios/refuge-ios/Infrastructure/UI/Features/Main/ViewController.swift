@@ -20,14 +20,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var webService: WebService = BasicWebService(
-        baseURL: "http://www.refugerestrooms.org:80/api/v1/",
-        jsonSerializer: BasicJSONSerializer(),
-        networkActivityIndicator: BasicNetworkActivityIndicator(),
-        urlConstructor: BasicWebServiceURLConstructor(
-            parametersConverter: BasicWebServiceParametersConverter()
-        )
-    )
+    var webService: WebService!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -24,6 +24,7 @@
 		DC05C9501CF0CE1600EB128A /* WebServiceURLConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9481CF0CE1600EB128A /* WebServiceURLConstructor.swift */; };
 		DC05C9521CF0CE5700EB128A /* NetworkActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9511CF0CE5700EB128A /* NetworkActivityIndicator.swift */; };
 		DC05C9541CF0CEB400EB128A /* BasicNetworkActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9531CF0CEB400EB128A /* BasicNetworkActivityIndicator.swift */; };
+		DC05C95F1CF2006B00EB128A /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C95E1CF2006B00EB128A /* AppAssembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		DC05C9481CF0CE1600EB128A /* WebServiceURLConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceURLConstructor.swift; sourceTree = "<group>"; };
 		DC05C9511CF0CE5700EB128A /* NetworkActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicator.swift; sourceTree = "<group>"; };
 		DC05C9531CF0CEB400EB128A /* BasicNetworkActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicNetworkActivityIndicator.swift; sourceTree = "<group>"; };
+		DC05C95E1CF2006B00EB128A /* AppAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
 		F7096657E6BA09AD09A2FE71 /* Pods-refuge-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-refuge-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-refuge-ios/Pods-refuge-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				DC05C8EB1CF08B5C00EB128A /* AppDelegate.swift */,
+				DC05C95D1CF2004700EB128A /* Assemblies */,
 				DC05C9151CF0987D00EB128A /* Infrastructure */,
 				DC05C9161CF0987D00EB128A /* Interface Adapters */,
 				DC05C9171CF0987D00EB128A /* Use Cases */,
@@ -175,7 +178,6 @@
 		DC05C9181CF098A200EB128A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DC05C8EF1CF08B5C00EB128A /* Main.storyboard */,
 				DC05C8F51CF08B5C00EB128A /* Assets.xcassets */,
 				DC05C8F71CF08B5C00EB128A /* LaunchScreen.storyboard */,
 			);
@@ -225,6 +227,7 @@
 		DC05C91F1CF099B000EB128A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				DC05C8EF1CF08B5C00EB128A /* Main.storyboard */,
 				DC05C9201CF099C700EB128A /* ViewController.swift */,
 			);
 			path = Main;
@@ -253,6 +256,14 @@
 				DC05C9481CF0CE1600EB128A /* WebServiceURLConstructor.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		DC05C95D1CF2004700EB128A /* Assemblies */ = {
+			isa = PBXGroup;
+			children = (
+				DC05C95E1CF2006B00EB128A /* AppAssembly.swift */,
+			);
+			path = Assemblies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,6 +372,7 @@
 				DC05C8EC1CF08B5C00EB128A /* AppDelegate.swift in Sources */,
 				DC05C94C1CF0CE1600EB128A /* BasicWebServiceURLConstructor.swift in Sources */,
 				DC05C9211CF099C700EB128A /* ViewController.swift in Sources */,
+				DC05C95F1CF2006B00EB128A /* AppAssembly.swift in Sources */,
 				DC05C9541CF0CEB400EB128A /* BasicNetworkActivityIndicator.swift in Sources */,
 				DC05C94D1CF0CE1600EB128A /* JSONSerializer.swift in Sources */,
 				DC05C94F1CF0CE1600EB128A /* WebServiceParametersConverter.swift in Sources */,
@@ -397,7 +409,7 @@
 				DC05C8F01CF08B5C00EB128A /* Base */,
 			);
 			name = Main.storyboard;
-			path = ../..;
+			path = ../../../..;
 			sourceTree = "<group>";
 		};
 		DC05C8F71CF08B5C00EB128A /* LaunchScreen.storyboard */ = {
