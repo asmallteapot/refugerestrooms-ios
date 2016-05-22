@@ -59,16 +59,16 @@ internal struct RefugeRestroomRepository: RestroomRepository {
         let request = webServiceRequestAssembly.fetchLatestRestroomsRequest(cap: cap)
         
         webService.executeRequest(request) {
-            (json, error) in
+            result in
             
-            if let error = error {
+            switch result {
+            case .Success(let json):
+                let jsonParserResult = self.jsonParser.restroomsFromJSON(json)
+                
+                completion(jsonParserResult)
+            case .Failure(let error):
                 completion(Result(error: error))
-                return
             }
-            
-            let jsonParserResult = self.jsonParser.restroomsFromJSON(json!)
-            
-            completion(jsonParserResult)
         }
     }
     

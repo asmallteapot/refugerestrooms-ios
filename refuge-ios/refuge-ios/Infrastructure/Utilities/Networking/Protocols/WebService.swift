@@ -31,6 +31,6 @@ internal protocol WebService {
      - parameter request:    Request.
      - parameter completion: Completion with JSON when successful, error otherwise.
      */
-    func executeRequest(request: WebServiceRequest, completion: (JSON?, NSError?) -> ())
+    func executeRequest(request: WebServiceRequest, completion: Result<JSON> -> ())
     
 }

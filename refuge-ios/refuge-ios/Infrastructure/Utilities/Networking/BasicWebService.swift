@@ -116,7 +116,7 @@ internal final class BasicWebService: WebService {
     
     // MARK: WebService
     
-    func executeRequest(request: WebServiceRequest, completion: (JSON?, NSError?) -> ()) {
+    func executeRequest(request: WebServiceRequest, completion: Result<JSON> -> ()) {
         switch request.method {
         case .GET:
             GET(request.path, parameters: request.parameters, completion: completion)
@@ -127,7 +127,7 @@ internal final class BasicWebService: WebService {
     
     // MARK: Private instance functions
     
-    private func GET(path: String, parameters: [String : AnyObject]?, completion: (JSON?, NSError?) -> ()) {
+    private func GET(path: String, parameters: [String : AnyObject]?, completion: Result<JSON> -> ()) {
         if currentTask != nil {
             currentTask?.cancel()
         }
@@ -138,7 +138,7 @@ internal final class BasicWebService: WebService {
             let errorDescription = "Invalid URL for web service request: \(urlString)"
             let error = NSError(domain: "com.refugerestrooms.refuge-ios.webservice", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])
             
-            completion(nil, error)
+            completion(Result(error: error))
             return
         }
         
@@ -150,7 +150,7 @@ internal final class BasicWebService: WebService {
             self?.networkActivityIndicator.stop()
             
             if let error = error {
-                completion(nil, error)
+                completion(Result(error: error))
                 return
             }
             
@@ -158,12 +158,12 @@ internal final class BasicWebService: WebService {
                 let errorDescription = "Invalid web service response but no error indicated."
                 let error = NSError(domain: "com.refugerestrooms.refuge-ios.webservice", code: 2, userInfo: [NSLocalizedDescriptionKey : errorDescription])
                 
-                completion(nil, error)
+                completion(Result(error: error))
                 return
             }
             
             if httpResponse.statusCode == 204 {
-                completion(NSNull(), nil)
+                completion(Result(value: NSNull()))
                 return
             }
             
@@ -171,7 +171,7 @@ internal final class BasicWebService: WebService {
                 let errorDescription = "Web service request completed with unexpected status code: \(httpResponse.statusCode)"
                 let error = NSError(domain: "com.refugerestrooms.refuge-ios.webservice", code: 3, userInfo: [NSLocalizedDescriptionKey : errorDescription])
                 
-                completion(nil, error)
+                completion(Result(error: error))
                 return
             }
             
@@ -180,12 +180,7 @@ internal final class BasicWebService: WebService {
                 let jsonReadingOptions = self?.jsonReadingOptions {
                 let serializationResult = jsonSerializer.serializeDataToJSON(data, readingOptions: jsonReadingOptions)
                 
-                switch serializationResult {
-                case .Success(let json):
-                    completion(json, nil)
-                case .Failure(let error):
-                    completion(nil, error as NSError)
-                }
+                completion(serializationResult)
             }
         }
         
