@@ -27,7 +27,7 @@ internal struct BasicJSONParser: JSONParser {
     // MARK: JSONParser
     
     func restroomsFromJSON(json: JSON) -> Result<[Restroom]> {
-        guard let jsonArray = json as? [[String : AnyObject]] else {
+        guard case .Array(let jsonArray) = json else {
             let errorDescription = "Cannot parse JSON."
             let error = NSError(domain: "com.refugerestrooms.refuge-ios.jsonparser", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])
             

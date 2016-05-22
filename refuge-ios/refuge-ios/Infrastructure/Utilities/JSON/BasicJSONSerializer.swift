@@ -26,7 +26,7 @@ internal struct BasicJSONSerializer: JSONSerializer {
     
     // MARK: JSONSerializer
     
-    func serializeDataToJSON(data: NSData?, readingOptions: NSJSONReadingOptions) -> Result<JSON> {
+    func serializeDataToJSON(data: NSData?, readingOptions: NSJSONReadingOptions) -> Result<AnyObject> {
         guard let data = data else {
             let errorDescription = "JSON serialization failed with nil or zero length input data."
             let error = NSError(domain: "com.refugerestrooms.refuge-ios.jsonserializer", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])

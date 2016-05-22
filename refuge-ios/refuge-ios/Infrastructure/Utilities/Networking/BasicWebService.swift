@@ -116,7 +116,7 @@ internal final class BasicWebService: WebService {
     
     // MARK: WebService
     
-    func executeRequest(request: WebServiceRequest, completion: Result<JSON> -> ()) {
+    func executeRequest(request: WebServiceRequest, completion: Result<AnyObject> -> ()) {
         switch request.method {
         case .GET:
             GET(request.path, parameters: request.parameters, completion: completion)
@@ -127,7 +127,7 @@ internal final class BasicWebService: WebService {
     
     // MARK: Private instance functions
     
-    private func GET(path: String, parameters: [String : AnyObject]?, completion: Result<JSON> -> ()) {
+    private func GET(path: String, parameters: [String : AnyObject]?, completion: Result<AnyObject> -> ()) {
         if currentTask != nil {
             currentTask?.cancel()
         }

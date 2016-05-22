@@ -62,7 +62,20 @@ internal struct RefugeRestroomRepository: RestroomRepository {
             result in
             
             switch result {
-            case .Success(let json):
+            case .Success(let value):
+                if let _ = value as? NSNull {
+                    completion(Result(value: []))
+                    return
+                }
+                
+                guard let json = JSON(value: value) else {
+                    let errorDescription = "Invalid data retrieved from web request."
+                    let error = NSError(domain: "com.refugerestrooms.refuge-ios.restroomrepository", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])
+                    
+                    completion(Result(error: error))
+                    return
+                }
+                
                 let jsonParserResult = self.jsonParser.restroomsFromJSON(json)
                 
                 completion(jsonParserResult)
