@@ -135,10 +135,7 @@ internal final class BasicWebService: WebService {
         let urlString = urlConstructor.constructURLWithBase(baseURL, path: path, parameters: parameters)
         
         guard let url = NSURL(string: urlString) else {
-            let errorDescription = "Invalid URL for web service request: \(urlString)"
-            let error = NSError(domain: "com.refugerestrooms.refuge-ios.webservice", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])
-            
-            completion(Result(error: error))
+            completion(Result(error: WebServiceError.InvalidURL(url: urlString)))
             return
         }
         
@@ -155,10 +152,7 @@ internal final class BasicWebService: WebService {
             }
             
             guard let httpResponse = response as? NSHTTPURLResponse else {
-                let errorDescription = "Invalid web service response but no error indicated."
-                let error = NSError(domain: "com.refugerestrooms.refuge-ios.webservice", code: 2, userInfo: [NSLocalizedDescriptionKey : errorDescription])
-                
-                completion(Result(error: error))
+                completion(Result(error: WebServiceError.InvalidResponseWithNoError))
                 return
             }
             
@@ -168,10 +162,7 @@ internal final class BasicWebService: WebService {
             }
             
             guard httpResponse.statusCode == 200 else {
-                let errorDescription = "Web service request completed with unexpected status code: \(httpResponse.statusCode)"
-                let error = NSError(domain: "com.refugerestrooms.refuge-ios.webservice", code: 3, userInfo: [NSLocalizedDescriptionKey : errorDescription])
-                
-                completion(Result(error: error))
+                completion(Result(error: WebServiceError.StatusCodeNotOK(statusCode: httpResponse.statusCode)))
                 return
             }
             

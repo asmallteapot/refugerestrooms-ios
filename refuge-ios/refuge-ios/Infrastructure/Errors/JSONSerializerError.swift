@@ -20,7 +20,7 @@
 import Foundation
 
 /// JSON serializer error.
-enum JSONSerializerError: ErrorType {
+internal enum JSONSerializerError: ErrorType {
     
     /// Data was nil or zero in length.
     case NilOrZeroLengthData

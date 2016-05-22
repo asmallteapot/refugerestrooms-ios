@@ -1,5 +1,5 @@
 //
-//  JSONParserError.swift
+//  WebServiceError.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -16,16 +16,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
+
 import Foundation
 
-/// JSON parser error.
-internal enum JSONParserError: ErrorType {
+/// Web service error.
+internal enum WebServiceError: ErrorType {
     
-    /// Invalid value found while parsing.
-    case InvalidValue
+    /// Invalid response for request but no error was indicated.
+    case InvalidResponseWithNoError
     
-    /// JSON is not in expected format.
-    case UnexpectedFormat
+    /// URL for request is invalid.
+    case InvalidURL(url: String)
+    
+    /// Request returned with status code indicating failure.
+    case StatusCodeNotOK(statusCode: NSInteger)
     
 }
 
@@ -33,27 +37,31 @@ internal enum JSONParserError: ErrorType {
 
 // MARK: CustomErrorConvertible
 
-extension JSONParserError: CustomErrorConvertible {
+extension WebServiceError: CustomErrorConvertible {
     
     var code: Int {
         switch self {
-        case .InvalidValue:
+        case .InvalidResponseWithNoError:
             return 1
-        case .UnexpectedFormat:
+        case .InvalidURL(_):
             return 2
+        case .StatusCodeNotOK(_):
+            return 3
         }
     }
     
     var subDomain: String {
-        return "jsonparser"
+        return "webservice"
     }
     
     var failureReason: String {
         switch self {
-        case .InvalidValue:
-            return "Invalid value found in JSON."
-        case .UnexpectedFormat:
-            return "Invalid JSON format."
+        case .InvalidResponseWithNoError:
+            return "Invalid web service response but no error indicated."
+        case .InvalidURL(let url):
+            return "Invalid URL for web service request: \(url)"
+        case .StatusCodeNotOK(let statusCode):
+            return "Web service request completed with unexpected status code: \(statusCode)"
         }
     }
     
