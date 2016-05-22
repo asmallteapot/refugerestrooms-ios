@@ -38,6 +38,8 @@
 		DC05C9871CF2337C00EB128A /* WebServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9861CF2337C00EB128A /* WebServiceRequest.swift */; };
 		DC05C9891CF233C900EB128A /* BasicWebServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9881CF233C900EB128A /* BasicWebServiceRequest.swift */; };
 		DC05C98D1CF240F600EB128A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C98C1CF240F600EB128A /* Result.swift */; };
+		DC05C9911CF2581F00EB128A /* CustomErrorConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9901CF2581F00EB128A /* CustomErrorConvertible.swift */; };
+		DC05C9931CF2594E00EB128A /* JSONParserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05C9921CF2594E00EB128A /* JSONParserError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		DC05C9861CF2337C00EB128A /* WebServiceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceRequest.swift; sourceTree = "<group>"; };
 		DC05C9881CF233C900EB128A /* BasicWebServiceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicWebServiceRequest.swift; sourceTree = "<group>"; };
 		DC05C98C1CF240F600EB128A /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		DC05C9901CF2581F00EB128A /* CustomErrorConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomErrorConvertible.swift; sourceTree = "<group>"; };
+		DC05C9921CF2594E00EB128A /* JSONParserError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParserError.swift; sourceTree = "<group>"; };
 		F7096657E6BA09AD09A2FE71 /* Pods-refuge-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-refuge-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-refuge-ios/Pods-refuge-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +186,7 @@
 		DC05C9151CF0987D00EB128A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				DC05C98E1CF2580100EB128A /* Errors */,
 				DC05C91A1CF0992E00EB128A /* Repositories */,
 				DC05C9181CF098A200EB128A /* Resources */,
 				DC05C91B1CF0992E00EB128A /* UI */,
@@ -353,6 +358,23 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		DC05C98E1CF2580100EB128A /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				DC05C98F1CF2581500EB128A /* Protocols */,
+				DC05C9921CF2594E00EB128A /* JSONParserError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		DC05C98F1CF2581500EB128A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DC05C9901CF2581F00EB128A /* CustomErrorConvertible.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -455,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC05C98D1CF240F600EB128A /* Result.swift in Sources */,
+				DC05C9911CF2581F00EB128A /* CustomErrorConvertible.swift in Sources */,
 				DC05C94E1CF0CE1600EB128A /* WebService.swift in Sources */,
 				DC05C9521CF0CE5700EB128A /* NetworkActivityIndicator.swift in Sources */,
 				DC05C97D1CF2252B00EB128A /* JSONParser.swift in Sources */,
@@ -476,6 +499,7 @@
 				DC05C94A1CF0CE1600EB128A /* BasicWebService.swift in Sources */,
 				DC05C9641CF206D200EB128A /* InfrastructureAssembly.swift in Sources */,
 				DC05C9791CF224DA00EB128A /* JSONSerializer.swift in Sources */,
+				DC05C9931CF2594E00EB128A /* JSONParserError.swift in Sources */,
 				DC05C9891CF233C900EB128A /* BasicWebServiceRequest.swift in Sources */,
 				DC05C9851CF2328600EB128A /* HTTPMethod.swift in Sources */,
 				DC05C9701CF21F4800EB128A /* Restroom.swift in Sources */,

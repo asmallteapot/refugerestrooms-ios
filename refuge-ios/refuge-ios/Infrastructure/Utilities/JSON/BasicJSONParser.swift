@@ -27,29 +27,25 @@ internal struct BasicJSONParser: JSONParser {
     // MARK: JSONParser
     
     func restroomsFromJSON(json: JSON) -> Result<[Restroom]> {
-        guard case .Array(let jsonArray) = json else {
-            let errorDescription = "Cannot parse JSON."
-            let error = NSError(domain: "com.refugerestrooms.refuge-ios.jsonparser", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])
-            
-            return Result(error: error)
-        }
-        
-        var restrooms: [Restroom] = []
-        
-        for json in jsonArray {
-            guard let name = json["name"] as? String else {
-                let errorDescription = "Cannot parse JSON."
-                let error = NSError(domain: "com.refugerestrooms.refuge-ios.jsonparser", code: 1, userInfo: [NSLocalizedDescriptionKey : errorDescription])
-                
-                return Result(error: error)
+        return Result {
+            guard case .Array(let jsonArray) = json else {
+                throw JSONParserError.UnexpectedFormat
             }
             
-            let restroom = Restroom(name: name)
+            var restrooms: [Restroom] = []
             
-            restrooms.append(restroom)
+            for json in jsonArray {
+                guard let name = json["name"] as? String else {
+                    throw JSONParserError.InvalidValue
+                }
+                
+                let restroom = Restroom(name: name)
+                
+                restrooms.append(restroom)
+            }
+            
+            return restrooms
         }
-        
-        return Result(value: restrooms)
     }
     
 }

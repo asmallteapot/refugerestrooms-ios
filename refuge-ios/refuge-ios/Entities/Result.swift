@@ -56,6 +56,23 @@ internal enum Result<T> {
         self = .Failure(error)
     }
     
+    /**
+     Initializes with specified throwing expression.
+     Sucess if the expression returns a value, Failure if it throws.
+     
+     - parameter throwingExpression: Throwing expression.
+     
+     - returns: Result.
+     */
+    init(@noescape _ throwingExpr: Void throws -> T) {
+        do {
+            let value = try throwingExpr()
+            self = Result.Success(value)
+        } catch {
+            self = Result.Failure(error)
+        }
+    }
+    
     // MARK: - Instance functions
     
     /**

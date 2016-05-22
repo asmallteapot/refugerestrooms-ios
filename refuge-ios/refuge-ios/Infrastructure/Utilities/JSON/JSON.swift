@@ -30,6 +30,8 @@ internal enum JSON {
     /// JSON dictionary.
     case Dictionary(value: [String : AnyObject])
     
+    // MARK: - Init/Deinit
+    
     /**
      Initializes with generic object.
      
