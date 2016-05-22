@@ -28,6 +28,6 @@ internal protocol RestroomRepository {
      - parameter cap: Number of restrooms to fetch.
      - parameter completion: Completion with restrooms when successful, error otherwise.
      */
-    func fetchLatestRestrooms(cap: Int, completion: ([Restroom]?, NSError?) -> ())
+    func fetchLatestRestrooms(cap: Int, completion: Result<[Restroom]> -> ())
     
 }

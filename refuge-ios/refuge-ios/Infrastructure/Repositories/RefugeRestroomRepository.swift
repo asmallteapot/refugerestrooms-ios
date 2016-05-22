@@ -55,25 +55,25 @@ internal struct RefugeRestroomRepository: RestroomRepository {
     
     // MARK: RestroomRepository
     
-    func fetchLatestRestrooms(cap: Int, completion: ([Restroom]?, NSError?) -> ()) {
+    func fetchLatestRestrooms(cap: Int, completion: Result<[Restroom]> -> ()) {
         let request = webServiceRequestAssembly.fetchLatestRestroomsRequest(cap: cap)
         
         webService.executeRequest(request) {
             (json, error) in
             
             if let error = error {
-                print("ERROR: \(error)")
+                completion(Result(error: error))
                 return
             }
             
             let jsonParserResult = self.jsonParser.restroomsFromJSON(json!)
             
             if let parserError = jsonParserResult.error {
-                completion(nil, parserError)
+                completion(Result(error: parserError))
                 return
             }
             
-            completion(jsonParserResult.restrooms, nil)
+            completion(Result(value: jsonParserResult.restrooms!))
         }
     }
     

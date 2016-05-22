@@ -27,14 +27,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         restroomRepository.fetchLatestRestrooms(5) {
-            (restrooms, error) in
+            result in
             
-            if let error = error {
+            switch result {
+            case .Success(let restrooms):
+                print(restrooms.map { $0.name })
+            case .Failure(let error):
                 print("ERROR: \(error)")
-                return
             }
-            
-            print(restrooms!.map { $0.name })
         }
     }
 
