@@ -26,7 +26,7 @@ internal struct BasicJSONParser: JSONParser, RestroomJSONParser {
     
     // MARK: JSONParser
     
-    func parseObjectsFromJSONArray<T>(jsonArray: [[String : AnyObject]], parsingFunction: [String : AnyObject] -> Result<T>) -> Result<[T]> {
+    func parseObjectsFromJSONArray<T>(jsonArray: JSONArray, parsingFunction: JSONDictionary -> Result<T>) -> Result<[T]> {
         return Result {
             var objects: [T] = []
             
@@ -48,7 +48,7 @@ internal struct BasicJSONParser: JSONParser, RestroomJSONParser {
     
     // MARK: RestroomJSONParser
     
-    func restroomFromJSON(json: [String : AnyObject]) -> Result<Restroom> {
+    func restroomFromJSON(json: JSONDictionary) -> Result<Restroom> {
         return Result {
             guard let name = json["name"] as? String else {
                 throw JSONParserError.InvalidValue
@@ -58,8 +58,8 @@ internal struct BasicJSONParser: JSONParser, RestroomJSONParser {
         }
     }
     
-    func restroomsFromJSONArray(jsonArray: JSON) -> Result<[Restroom]> {
-        return Result(value: jsonArray)
+    func restroomsFromJSON(json: JSON) -> Result<[Restroom]> {
+        return Result(value: json)
             .flatMap(ensureArray)
             .flatMap(parseRestrooms)
     }
@@ -68,9 +68,9 @@ internal struct BasicJSONParser: JSONParser, RestroomJSONParser {
     
     // MARK: Private instance functions
     
-    private func ensureArray(json: JSON) -> Result<[[String : AnyObject]]> {
+    private func ensureArray(json: JSON) -> Result<JSONArray> {
         return Result {
-            guard case .Array(let jsonArray) = json else {
+            guard let jsonArray = json as? JSONArray else {
                 throw JSONParserError.UnexpectedFormat
             }
             
@@ -78,7 +78,7 @@ internal struct BasicJSONParser: JSONParser, RestroomJSONParser {
         }
     }
     
-    private func parseRestrooms(jsonArray: [[String : AnyObject]]) -> Result<[Restroom]> {
+    private func parseRestrooms(jsonArray: JSONArray) -> Result<[Restroom]> {
         return parseObjectsFromJSONArray(jsonArray, parsingFunction: restroomFromJSON)
     }
     

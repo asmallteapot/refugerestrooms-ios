@@ -19,56 +19,11 @@
 
 import Foundation
 
-/**
-JSON in its various representations.
-*/
-internal enum JSON {
-    
-    /// JSON array.
-    case Array(value: [[String : AnyObject]])
-    
-    /// JSON dictionary.
-    case Dictionary(value: [String : AnyObject])
-    
-    // MARK: - Init/Deinit
-    
-    /**
-     Initializes with generic object.
-     
-     - parameter value: Generic object.
-     
-     - returns: JSON if object is a valid type, nil otherwise.
-     */
-    init?(value: AnyObject) {
-        if let value = value as? [[String : AnyObject]] {
-            self = .Array(value: value)
-        } else if let value = value as? [String : AnyObject] {
-            self = .Dictionary(value: value)
-        } else {
-            return nil
-        }
-    }
-    
-    /**
-     Initializes with dictionary.
-     
-     - parameter value: Dictionary.
-     
-     - returns: JSON.
-     */
-    init(value: [String : AnyObject]) {
-        self = .Dictionary(value: value)
-    }
-    
-    /**
-     Initializes with array.
-     
-     - parameter value: Array.
-     
-     - returns: JSON.
-     */
-    init(value: [[String : AnyObject]]) {
-        self = .Array(value: value)
-    }
-    
-}
+/// JSON.
+typealias JSON = AnyObject
+
+/// JSON dictionary.
+typealias JSONDictionary = [String : AnyObject]
+
+/// JSON array.
+typealias JSONArray = [JSONDictionary]

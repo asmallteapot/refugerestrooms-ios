@@ -68,12 +68,7 @@ internal struct RefugeRestroomRepository: RestroomRepository {
                     return
                 }
                 
-                guard let json = JSON(value: value) else {
-                    completion(Result(error: RestroomRepositoryError.InvalidDataFromWebRequest))
-                    return
-                }
-                
-                let jsonParserResult = self.jsonParser.restroomsFromJSONArray(json)
+                let jsonParserResult = self.jsonParser.restroomsFromJSON(value)
                 
                 completion(jsonParserResult)
             case .Failure(let error):

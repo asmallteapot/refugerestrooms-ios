@@ -29,7 +29,7 @@ internal protocol JSONParser: RestroomJSONParser {
      
      - returns: Result with objects when successful, error otherwise.
      */
-    func parseObjectsFromJSONArray<T>(jsonArray: [[String : AnyObject]], parsingFunction: [String : AnyObject] -> Result<T>) -> Result<[T]>
+    func parseObjectsFromJSONArray<T>(jsonArray: JSONArray, parsingFunction: JSONDictionary -> Result<T>) -> Result<[T]>
     
 }
 
@@ -43,15 +43,15 @@ internal protocol RestroomJSONParser {
      
      - returns: Result with restrooms when successful, error otherwise.
      */
-    func restroomFromJSON(json: [String : AnyObject]) -> Result<Restroom>
+    func restroomFromJSON(json: JSONDictionary) -> Result<Restroom>
     
     /**
-     Parses restrooms from provided JSON array.
+     Parses restrooms from provided JSON.
      
-     - parameter json: JSON array.
+     - parameter json: JSON.
      
      - returns: Result with restrooms when successful, error otherwise.
      */
-    func restroomsFromJSONArray(jsonArray: JSON) -> Result<[Restroom]>
+    func restroomsFromJSON(json: JSON) -> Result<[Restroom]>
     
 }
