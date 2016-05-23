@@ -28,8 +28,8 @@ internal enum WebServiceError: ErrorType {
     /// URL for request is invalid.
     case InvalidURL(url: String)
     
-    /// Request returned with status code indicating failure.
-    case StatusCodeNotOK(statusCode: NSInteger)
+    /// Request returned with unexpected status code.
+    case StatusCodeUnexpected(statusCode: NSInteger)
     
 }
 
@@ -45,7 +45,7 @@ extension WebServiceError: CustomErrorConvertible {
             return 1
         case .InvalidURL(_):
             return 2
-        case .StatusCodeNotOK(_):
+        case .StatusCodeUnexpected(_):
             return 3
         }
     }
@@ -60,7 +60,7 @@ extension WebServiceError: CustomErrorConvertible {
             return "Invalid web service response but no error indicated."
         case .InvalidURL(let url):
             return "Invalid URL for web service request: \(url)"
-        case .StatusCodeNotOK(let statusCode):
+        case .StatusCodeUnexpected(let statusCode):
             return "Web service request completed with unexpected status code: \(statusCode)"
         }
     }

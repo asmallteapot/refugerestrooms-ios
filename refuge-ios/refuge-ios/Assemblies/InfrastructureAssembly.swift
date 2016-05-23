@@ -161,8 +161,12 @@ extension AppAssembly {
     func webService(baseURL baseURL: String) -> WebService {
         return BasicWebService(
             baseURL: baseURL,
-            jsonSerializer: jsonSerializer(),
             networkActivityIndicator: networkActivityIndicator(),
+            resultsBuilder: BasicWebServiceResultsBuilder(
+                jsonReadingOptions: .AllowFragments,
+                jsonSerializer: jsonSerializer()
+            ),
+            sessionCacheType: .Disk,
             urlConstructor: webServiceURLConstructor()
         )
     }

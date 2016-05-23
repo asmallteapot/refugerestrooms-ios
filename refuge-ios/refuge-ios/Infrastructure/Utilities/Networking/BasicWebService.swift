@@ -48,70 +48,38 @@ internal final class BasicWebService: WebService {
     
     /// Base URL.
     let baseURL: String
-    
-    /// JSON reading options.
-    let jsonReadingOptions: NSJSONReadingOptions
-    
-    /// JSON serializer.
-    let jsonSerializer: JSONSerializer
 
     /// Network activity indicator.
     let networkActivityIndicator: NetworkActivityIndicator
+    
+    /// Results builder.
+    let resultsBuilder: WebServiceResultsBuilder
     
     /// URL constructor.
     let urlConstructor: WebServiceURLConstructor
     
     // MARK: Private properties
     
-    private enum SuccessStatusCode: Int {
-        case NoContent = 204
-        case OK = 200
-    }
-    
     private var session: NSURLSession?
     private var currentTask: NSURLSessionDataTask?
     
     // MARK: - Init/Deinit
-
-    /**
-     Creates new instance with provided details. 
-     
-     Defaults session cache type to Disk and JSON reading options to AllowFragments.
-     
-     - parameter baseURL:                  Base URL.
-     - parameter jsonSerializer:           JSON serializer.
-     - parameter networkActivityIndicator: Network activity indicator.
-     - parameter urlConstructor:           URL constructor.
-     
-     - returns: New instance.
-     */
-    convenience init(baseURL: String, jsonSerializer: JSONSerializer, networkActivityIndicator: NetworkActivityIndicator, urlConstructor: WebServiceURLConstructor) {
-        self.init(baseURL: baseURL,
-                  jsonReadingOptions: .AllowFragments,
-                  jsonSerializer: jsonSerializer,
-                  networkActivityIndicator: networkActivityIndicator,
-                  sessionCacheType: .Disk,
-                  urlConstructor: urlConstructor
-        )
-    }
     
     /**
      Creates new instance with provided details.
      
      - parameter baseURL:                  Base URL.
-     - parameter jsonReadingOptions:       JSON reading options.
-     - parameter jsonSerializer:           JSON serializer.
      - parameter networkActivityIndicator: Network activity indicator.
+     - parameter resultsBuilder:           Results builder.
      - parameter sessionCacheType:         Session cache type.
      - parameter urlConstructor:           URL constructor.
      
      - returns: New instance.
      */
-    init(baseURL: String, jsonReadingOptions: NSJSONReadingOptions, jsonSerializer: JSONSerializer, networkActivityIndicator: NetworkActivityIndicator, sessionCacheType: SessionCacheType, urlConstructor: WebServiceURLConstructor) {
+    init(baseURL: String, networkActivityIndicator: NetworkActivityIndicator, resultsBuilder: WebServiceResultsBuilder, sessionCacheType: SessionCacheType, urlConstructor: WebServiceURLConstructor) {
         self.baseURL = baseURL
-        self.jsonReadingOptions = jsonReadingOptions
-        self.jsonSerializer = jsonSerializer
         self.networkActivityIndicator = networkActivityIndicator
+        self.resultsBuilder = resultsBuilder
         self.urlConstructor = urlConstructor
         self.session = NSURLSession(configuration: sessionCacheType.sessionConfiguration())
         self.currentTask = nil
@@ -158,61 +126,14 @@ internal final class BasicWebService: WebService {
             let result = Result(value: (data: data, response: response, error: error))
             
             completion(result
-                .flatMap(strongSelf.ensureNoError)
-                .flatMap(strongSelf.ensureResponseExists)
-                .flatMap(strongSelf.ensureSuccessStatusCode)
-                .flatMap(strongSelf.processRequestData)
+                .flatMap(strongSelf.resultsBuilder.ensureNoError)
+                .flatMap(strongSelf.resultsBuilder.ensureHTTPResponseExists)
+                .flatMap(strongSelf.resultsBuilder.ensureSuccessStatusCode)
+                .flatMap(strongSelf.resultsBuilder.processRequestData)
             )
         }
         
         currentTask?.resume()
-    }
-    
-    // MARK: - Instance functions
-    
-    // Private instance functions
-    
-    private func ensureNoError(requestResult: (data: NSData?, response: NSURLResponse?, error: NSError?)) -> Result<(data: NSData?, response: NSURLResponse?)> {
-        return Result {
-            if let error = requestResult.error {
-                throw error
-            }
-            
-            return (requestResult.data, requestResult.response)
-        }
-    }
-    
-    private func ensureResponseExists(requestResult: (data: NSData?, response: NSURLResponse?)) -> Result<(data: NSData?, response: NSHTTPURLResponse)> {
-        return Result {
-            guard let response = requestResult.response as? NSHTTPURLResponse else {
-                throw WebServiceError.InvalidResponseWithNoError
-            }
-            
-            return (requestResult.data, response)
-        }
-    }
-    
-    private func ensureSuccessStatusCode(requestResult: (data: NSData?, response: NSHTTPURLResponse)) -> Result<(data: NSData?, statusCode: SuccessStatusCode)> {
-        return Result {
-            let statusCode = requestResult.response.statusCode
-            
-            guard let successStatusCode = SuccessStatusCode(rawValue: Int(statusCode)) else {
-                throw WebServiceError.StatusCodeNotOK(statusCode: statusCode)
-            }
-            
-            return (requestResult.data, successStatusCode)
-        }
-    }
-    
-    private func processRequestData(requestData: (data: NSData?, statusCode: SuccessStatusCode)) -> Result<AnyObject> {
-        switch requestData.statusCode {
-        case .NoContent:
-            return Result(value: NSNull())
-        case .OK:
-            let serializationResult = jsonSerializer.serializeDataToJSON(requestData.data, readingOptions: jsonReadingOptions)
-            
-            return serializationResult
-        }
     }
     
 }
