@@ -26,7 +26,7 @@ internal struct RefugeRestroomRepository: RestroomRepository {
     // MARK: - Properties
     
     /// JSON parser.
-    let jsonParser: JSONParser
+    let jsonParser: RestroomJSONParser
     
     /// Web service.
     let webService: WebService
@@ -45,7 +45,7 @@ internal struct RefugeRestroomRepository: RestroomRepository {
      
      - returns: New instance.
      */
-    init(jsonParser: JSONParser, webService: WebService, webServiceRequestAssembly: WebServiceRequestAssembly) {
+    init(jsonParser: RestroomJSONParser, webService: WebService, webServiceRequestAssembly: WebServiceRequestAssembly) {
         self.jsonParser = jsonParser
         self.webService = webService
         self.webServiceRequestAssembly = webServiceRequestAssembly
@@ -73,7 +73,7 @@ internal struct RefugeRestroomRepository: RestroomRepository {
                     return
                 }
                 
-                let jsonParserResult = self.jsonParser.restroomsFromJSON(json)
+                let jsonParserResult = self.jsonParser.restroomsFromJSONArray(json)
                 
                 completion(jsonParserResult)
             case .Failure(let error):

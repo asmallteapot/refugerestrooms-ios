@@ -20,15 +20,38 @@
 import Foundation
 
 /// Parses JSON into objects.
-internal protocol JSONParser {
+internal protocol JSONParser: RestroomJSONParser {
     
     /**
-     Parses restrooms from provided JSON.
+     Parses objects from JSON Array.
+     
+     - parameter jsonArray: JSON array.
+     
+     - returns: Result with objects when successful, error otherwise.
+     */
+    func parseObjectsFromJSONArray<T>(jsonArray: [[String : AnyObject]], parsingFunction: [String : AnyObject] -> Result<T>) -> Result<[T]>
+    
+}
+
+/// Parses JSON into restroom objects.
+internal protocol RestroomJSONParser {
+    
+    /**
+     Parses restroom from provided JSON.
      
      - parameter json: JSON.
      
      - returns: Result with restrooms when successful, error otherwise.
      */
-    func restroomsFromJSON(json: JSON) -> Result<[Restroom]>
+    func restroomFromJSON(json: [String : AnyObject]) -> Result<Restroom>
+    
+    /**
+     Parses restrooms from provided JSON array.
+     
+     - parameter json: JSON array.
+     
+     - returns: Result with restrooms when successful, error otherwise.
+     */
+    func restroomsFromJSONArray(jsonArray: JSON) -> Result<[Restroom]>
     
 }

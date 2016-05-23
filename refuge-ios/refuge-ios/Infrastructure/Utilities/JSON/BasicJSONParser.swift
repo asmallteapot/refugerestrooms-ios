@@ -20,14 +20,46 @@
 import Foundation
 
 /// Basic JSON parser.
-internal struct BasicJSONParser: JSONParser {
+internal struct BasicJSONParser: JSONParser, RestroomJSONParser {
     
     // MARK: - Protocol conformance
     
     // MARK: JSONParser
     
-    func restroomsFromJSON(json: JSON) -> Result<[Restroom]> {
-        return Result(value: json)
+    func parseObjectsFromJSONArray<T>(jsonArray: [[String : AnyObject]], parsingFunction: [String : AnyObject] -> Result<T>) -> Result<[T]> {
+        return Result {
+            var objects: [T] = []
+            
+            for json in jsonArray {
+                let result = parsingFunction(json)
+                
+                do {
+                    let object = try result.resolve()
+                    
+                    objects.append(object)
+                } catch {
+                    throw error
+                }
+            }
+            
+            return objects
+        }
+    }
+    
+    // MARK: RestroomJSONParser
+    
+    func restroomFromJSON(json: [String : AnyObject]) -> Result<Restroom> {
+        return Result {
+            guard let name = json["name"] as? String else {
+                throw JSONParserError.InvalidValue
+            }
+            
+            return Restroom(name: name)
+        }
+    }
+    
+    func restroomsFromJSONArray(jsonArray: JSON) -> Result<[Restroom]> {
+        return Result(value: jsonArray)
             .flatMap(ensureArray)
             .flatMap(parseRestrooms)
     }
@@ -47,21 +79,7 @@ internal struct BasicJSONParser: JSONParser {
     }
     
     private func parseRestrooms(jsonArray: [[String : AnyObject]]) -> Result<[Restroom]> {
-        return Result {
-            var restrooms: [Restroom] = []
-            
-            for json in jsonArray {
-                guard let name = json["name"] as? String else {
-                    throw JSONParserError.InvalidValue
-                }
-                
-                let restroom = Restroom(name: name)
-                
-                restrooms.append(restroom)
-            }
-
-            return restrooms
-        }
+        return parseObjectsFromJSONArray(jsonArray, parsingFunction: restroomFromJSON)
     }
     
 }
