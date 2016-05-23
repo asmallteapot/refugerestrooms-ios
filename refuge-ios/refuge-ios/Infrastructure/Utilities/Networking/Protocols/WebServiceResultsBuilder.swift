@@ -45,7 +45,7 @@ internal protocol WebServiceResultsBuilder {
     func ensureHTTPResponseExists(requestResult: (data: NSData?, response: NSURLResponse?)) -> Result<(data: NSData?, response: NSHTTPURLResponse)>
     
     /**
-     Ensures the status code for web service request is successful.
+     Ensures the status code for web service request is expected.
      
      Should be called as Step 3 in the build process.
      
@@ -53,17 +53,17 @@ internal protocol WebServiceResultsBuilder {
      
      - returns: Request data and status code.
      */
-    func ensureSuccessStatusCode(requestResult: (data: NSData?, response: NSHTTPURLResponse)) -> Result<(data: NSData?, statusCode: HTTPResponseStatusCode)>
+    func ensureExpectedStatusCode(requestResult: (data: NSData?, response: NSHTTPURLResponse)) -> Result<(data: NSData?, statusCode: HTTPResponseStatusCode)>
     
     /**
-     Processes web service request data into its final form.
+     Serializes web request data to JSON.
      
      Should be called as Step 4 in the build process.
      
      - parameter requestData: Request data.
      
-     - returns: Result of web service request processing data.
+     - returns: JSON.
      */
-    func processRequestData(requestData: (data: NSData?, statusCode: HTTPResponseStatusCode)) -> Result<AnyObject>
+    func serializeDataToJSON(requestData: (data: NSData?, statusCode: HTTPResponseStatusCode)) -> Result<JSON>
     
 }

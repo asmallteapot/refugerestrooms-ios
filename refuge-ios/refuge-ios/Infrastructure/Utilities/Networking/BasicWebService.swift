@@ -135,8 +135,8 @@ internal final class BasicWebService: WebService {
             completion(result
                 .flatMap(strongSelf.resultsBuilder.ensureNoError)
                 .flatMap(strongSelf.resultsBuilder.ensureHTTPResponseExists)
-                .flatMap(strongSelf.resultsBuilder.ensureSuccessStatusCode)
-                .flatMap(strongSelf.resultsBuilder.processRequestData)
+                .flatMap(strongSelf.resultsBuilder.ensureExpectedStatusCode)
+                .flatMap(strongSelf.resultsBuilder.serializeDataToJSON)
             )
         }
         

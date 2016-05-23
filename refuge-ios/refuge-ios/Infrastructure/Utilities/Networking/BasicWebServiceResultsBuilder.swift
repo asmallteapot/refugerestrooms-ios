@@ -41,7 +41,7 @@ internal struct BasicWebServiceResultsBuilder: WebServiceResultsBuilder {
         }
     }
     
-    func ensureSuccessStatusCode(requestResult: (data: NSData?, response: NSHTTPURLResponse)) -> Result<(data: NSData?, statusCode: HTTPResponseStatusCode)> {
+    func ensureExpectedStatusCode(requestResult: (data: NSData?, response: NSHTTPURLResponse)) -> Result<(data: NSData?, statusCode: HTTPResponseStatusCode)> {
         return Result {
             let statusCode = requestResult.response.statusCode
             
@@ -53,7 +53,7 @@ internal struct BasicWebServiceResultsBuilder: WebServiceResultsBuilder {
         }
     }
     
-    func processRequestData(requestData: (data: NSData?, statusCode: HTTPResponseStatusCode)) -> Result<AnyObject> {
+    func serializeDataToJSON(requestData: (data: NSData?, statusCode: HTTPResponseStatusCode)) -> Result<JSON> {
         switch requestData.statusCode {
         case .NoContent:
             return Result(value: NSNull())
