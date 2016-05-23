@@ -63,6 +63,11 @@ internal final class BasicWebService: WebService {
     
     // MARK: Private properties
     
+    private enum SuccessStatusCode: Int {
+        case NoContent = 204
+        case OK = 200
+    }
+    
     private var session: NSURLSession?
     private var currentTask: NSURLSessionDataTask?
     
@@ -142,40 +147,72 @@ internal final class BasicWebService: WebService {
         networkActivityIndicator.start()
         
         currentTask = session?.dataTaskWithURL(url) {
-            [weak self] data, response, error in
+            [weak self] (data, response, error) in
             
             self?.networkActivityIndicator.stop()
             
-            if let error = error {
-                completion(Result(error: error))
+            guard let strongSelf = self else {
                 return
             }
             
-            guard let httpResponse = response as? NSHTTPURLResponse else {
-                completion(Result(error: WebServiceError.InvalidResponseWithNoError))
-                return
-            }
+            let result = Result(value: (data: data, response: response, error: error))
             
-            if httpResponse.statusCode == 204 {
-                completion(Result(value: NSNull()))
-                return
-            }
-            
-            guard httpResponse.statusCode == 200 else {
-                completion(Result(error: WebServiceError.StatusCodeNotOK(statusCode: httpResponse.statusCode)))
-                return
-            }
-            
-            if
-                let jsonSerializer = self?.jsonSerializer,
-                let jsonReadingOptions = self?.jsonReadingOptions {
-                let serializationResult = jsonSerializer.serializeDataToJSON(data, readingOptions: jsonReadingOptions)
-                
-                completion(serializationResult)
-            }
+            completion(result
+                .flatMap(strongSelf.ensureNoError)
+                .flatMap(strongSelf.ensureResponseExists)
+                .flatMap(strongSelf.ensureSuccessStatusCode)
+                .flatMap(strongSelf.processRequestData)
+            )
         }
         
         currentTask?.resume()
+    }
+    
+    // MARK: - Instance functions
+    
+    // Private instance functions
+    
+    private func ensureNoError(requestResult: (data: NSData?, response: NSURLResponse?, error: NSError?)) -> Result<(data: NSData?, response: NSURLResponse?)> {
+        return Result {
+            if let error = requestResult.error {
+                throw error
+            }
+            
+            return (requestResult.data, requestResult.response)
+        }
+    }
+    
+    private func ensureResponseExists(requestResult: (data: NSData?, response: NSURLResponse?)) -> Result<(data: NSData?, response: NSHTTPURLResponse)> {
+        return Result {
+            guard let response = requestResult.response as? NSHTTPURLResponse else {
+                throw WebServiceError.InvalidResponseWithNoError
+            }
+            
+            return (requestResult.data, response)
+        }
+    }
+    
+    private func ensureSuccessStatusCode(requestResult: (data: NSData?, response: NSHTTPURLResponse)) -> Result<(data: NSData?, statusCode: SuccessStatusCode)> {
+        return Result {
+            let statusCode = requestResult.response.statusCode
+            
+            guard let successStatusCode = SuccessStatusCode(rawValue: Int(statusCode)) else {
+                throw WebServiceError.StatusCodeNotOK(statusCode: statusCode)
+            }
+            
+            return (requestResult.data, successStatusCode)
+        }
+    }
+    
+    private func processRequestData(requestData: (data: NSData?, statusCode: SuccessStatusCode)) -> Result<AnyObject> {
+        switch requestData.statusCode {
+        case .NoContent:
+            return Result(value: NSNull())
+        case .OK:
+            let serializationResult = jsonSerializer.serializeDataToJSON(requestData.data, readingOptions: jsonReadingOptions)
+            
+            return serializationResult
+        }
     }
     
 }
