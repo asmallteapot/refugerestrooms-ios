@@ -79,6 +79,13 @@ internal protocol UtilityAssembly: WebServiceRequestAssembly {
      - returns: JSON serializer.
      */
     func jsonSerializer() -> JSONSerializer
+
+    /**
+     JSON transformer.
+     
+     - returns: JSON transformer.
+     */
+    func jsonTransformer() -> JSONTransformer
     
     /**
      Network activity indicator.
@@ -95,6 +102,13 @@ internal protocol UtilityAssembly: WebServiceRequestAssembly {
      - returns: Web service.
      */
     func webService(baseURL baseURL: String) -> WebService
+    
+    /**
+     Web service results builder.
+     
+     - returns: Web service results builder.
+     */
+    func webServiceResultsBuilder() -> WebServiceResultsBuilder
     
     /**
      Web service URL constructor.
@@ -147,11 +161,15 @@ extension AppAssembly {
     // MARK: - UtilityAssembly
     
     func jsonParser() -> JSONParser {
-        return BasicJSONParser()
+        return BasicJSONParser(jsonTransformer: jsonTransformer())
     }
     
     func jsonSerializer() -> JSONSerializer {
         return BasicJSONSerializer()
+    }
+    
+    func jsonTransformer() -> JSONTransformer {
+        return BasicJSONTransformer()
     }
     
     func networkActivityIndicator() -> NetworkActivityIndicator {
@@ -162,12 +180,16 @@ extension AppAssembly {
         return BasicWebService(
             baseURL: baseURL,
             networkActivityIndicator: networkActivityIndicator(),
-            resultsBuilder: BasicWebServiceResultsBuilder(
-                jsonReadingOptions: .AllowFragments,
-                jsonSerializer: jsonSerializer()
-            ),
+            resultsBuilder: webServiceResultsBuilder(),
             sessionCacheType: .Disk,
             urlConstructor: webServiceURLConstructor()
+        )
+    }
+    
+    func webServiceResultsBuilder() -> WebServiceResultsBuilder {
+        return BasicWebServiceResultsBuilder(
+            jsonReadingOptions: .AllowFragments,
+            jsonSerializer: jsonSerializer()
         )
     }
     

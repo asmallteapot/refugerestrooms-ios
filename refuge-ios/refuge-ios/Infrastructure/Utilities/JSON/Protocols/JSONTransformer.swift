@@ -1,5 +1,5 @@
 //
-//  JSONParserError.swift
+//  JSONTransformer.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -19,36 +19,25 @@
 
 import Foundation
 
-/// JSON parser error.
-internal enum JSONParserError: ErrorType {
+/// Transforms geneic JSON into more specific form.
+internal protocol JSONTransformer {
     
-    /// Invalid value found while parsing.
-    case InvalidValue
+    /**
+     Transforms generic JSON to JSON array.
+     
+     - parameter json: JSON to transform.
+     
+     - returns: JSON array when successful, error otherwise.
+     */
+    func toArray(json: JSON) -> Result<JSONArray>
     
-}
-
-// MARK: - Protocol conformance
-
-// MARK: CustomErrorConvertible
-
-extension JSONParserError: CustomErrorConvertible {
-    
-    var code: Int {
-        switch self {
-        case .InvalidValue:
-            return 1
-        }
-    }
-    
-    var subDomain: String {
-        return "jsonparser"
-    }
-    
-    var failureReason: String {
-        switch self {
-        case .InvalidValue:
-            return "Invalid value found in JSON."
-        }
-    }
+    /**
+     Transforms generic JSON to JSON dictionary.
+     
+     - parameter json: JSON to transform.
+     
+     - returns: JSON dictionary when successful, error otherwise.
+     */
+    func toDictionary(json: JSON) -> Result<JSONDictionary>
     
 }

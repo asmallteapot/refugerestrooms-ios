@@ -1,5 +1,5 @@
 //
-//  JSONParserError.swift
+//  BasicJSONTransformer.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -19,35 +19,30 @@
 
 import Foundation
 
-/// JSON parser error.
-internal enum JSONParserError: ErrorType {
+/// Basic JSON transformer.
+internal struct BasicJSONTransformer: JSONTransformer {
     
-    /// Invalid value found while parsing.
-    case InvalidValue
+    // MARK: - Protocol conformance
     
-}
-
-// MARK: - Protocol conformance
-
-// MARK: CustomErrorConvertible
-
-extension JSONParserError: CustomErrorConvertible {
+    // MARK: JSONTransformer
     
-    var code: Int {
-        switch self {
-        case .InvalidValue:
-            return 1
+    func toArray(json: JSON) -> Result<JSONArray> {
+        return Result {
+            guard let jsonArray = json as? JSONArray else {
+                throw JSONTransformerError.UnexpectedFormat
+            }
+            
+            return jsonArray
         }
     }
     
-    var subDomain: String {
-        return "jsonparser"
-    }
-    
-    var failureReason: String {
-        switch self {
-        case .InvalidValue:
-            return "Invalid value found in JSON."
+    func toDictionary(json: JSON) -> Result<JSONDictionary> {
+        return Result {
+            guard let jsonDictionary = json as? JSONDictionary else {
+                throw JSONTransformerError.UnexpectedFormat
+            }
+            
+            return jsonDictionary
         }
     }
     

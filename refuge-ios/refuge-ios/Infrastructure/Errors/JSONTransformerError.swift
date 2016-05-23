@@ -1,5 +1,5 @@
 //
-//  JSONParserError.swift
+//  JSONTransformerError.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -19,11 +19,11 @@
 
 import Foundation
 
-/// JSON parser error.
-internal enum JSONParserError: ErrorType {
+/// JSON transformer error.
+internal enum JSONTransformerError: ErrorType {
     
-    /// Invalid value found while parsing.
-    case InvalidValue
+    /// JSON is not in expected format.
+    case UnexpectedFormat
     
 }
 
@@ -31,23 +31,23 @@ internal enum JSONParserError: ErrorType {
 
 // MARK: CustomErrorConvertible
 
-extension JSONParserError: CustomErrorConvertible {
+extension JSONTransformerError: CustomErrorConvertible {
     
     var code: Int {
         switch self {
-        case .InvalidValue:
+        case .UnexpectedFormat:
             return 1
         }
     }
     
     var subDomain: String {
-        return "jsonparser"
+        return "jsontransformer"
     }
     
     var failureReason: String {
         switch self {
-        case .InvalidValue:
-            return "Invalid value found in JSON."
+        case .UnexpectedFormat:
+            return "Unexpected JSON format."
         }
     }
     

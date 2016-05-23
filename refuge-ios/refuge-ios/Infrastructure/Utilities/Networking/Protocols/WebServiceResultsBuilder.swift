@@ -1,5 +1,6 @@
 //
 //  WebServiceResultsBuilder.swift
+//
 // Copyleft (c) 2016 Refuge Restrooms
 //
 // Refuge is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE

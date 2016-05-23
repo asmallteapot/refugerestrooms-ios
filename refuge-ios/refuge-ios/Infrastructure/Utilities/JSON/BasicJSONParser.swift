@@ -22,6 +22,11 @@ import Foundation
 /// Basic JSON parser.
 internal struct BasicJSONParser: JSONParser, RestroomJSONParser {
     
+    // MARK: - Properties
+
+    /// JSON transformer.
+    let jsonTransformer: JSONTransformer
+    
     // MARK: - Protocol conformance
     
     // MARK: JSONParser
@@ -60,23 +65,13 @@ internal struct BasicJSONParser: JSONParser, RestroomJSONParser {
     
     func restroomsFromJSON(json: JSON) -> Result<[Restroom]> {
         return Result(value: json)
-            .flatMap(ensureArray)
+            .flatMap(jsonTransformer.toArray)
             .flatMap(parseRestrooms)
     }
     
     // MARK: - Instance functions
     
     // MARK: Private instance functions
-    
-    private func ensureArray(json: JSON) -> Result<JSONArray> {
-        return Result {
-            guard let jsonArray = json as? JSONArray else {
-                throw JSONParserError.UnexpectedFormat
-            }
-            
-            return jsonArray
-        }
-    }
     
     private func parseRestrooms(jsonArray: JSONArray) -> Result<[Restroom]> {
         return parseObjectsFromJSONArray(jsonArray, parsingFunction: restroomFromJSON)
