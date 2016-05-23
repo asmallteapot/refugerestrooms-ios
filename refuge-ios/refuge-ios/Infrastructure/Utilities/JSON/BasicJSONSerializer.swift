@@ -26,7 +26,7 @@ internal struct BasicJSONSerializer: JSONSerializer {
     
     // MARK: JSONSerializer
     
-    func serializeDataToJSON(data: NSData?, readingOptions: NSJSONReadingOptions) -> Result<AnyObject> {
+    func serializeDataToJSON(data: NSData?, readingOptions: NSJSONReadingOptions) -> Result<JSON> {
         return Result {
             guard let data = data else {
                 throw JSONSerializerError.NilOrZeroLengthData

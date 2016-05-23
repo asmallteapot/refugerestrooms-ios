@@ -25,7 +25,7 @@ internal enum HTTPResponseStatusCode: Int {
     /// No content (204).
     case NoContent = 204
     
-    /// OK (200)
+    /// OK (200).
     case OK = 200
     
 }

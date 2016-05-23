@@ -19,7 +19,7 @@
 
 import Foundation
 
-/// Web service that facilitates communication with entities on the web that return data.
+/// Web service that facilitates communication with entities on the web that return JSON.
 internal protocol WebService {
     
     /// Base URL associated with the service.
@@ -31,6 +31,6 @@ internal protocol WebService {
      - parameter request:    Request.
      - parameter completion: Completion with data when successful, error otherwise.
      */
-    func executeRequest(request: WebServiceRequest, completion: Result<AnyObject> -> ())
+    func executeRequest(request: WebServiceRequest, completion: Result<JSON> -> ())
     
 }

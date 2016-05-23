@@ -30,6 +30,6 @@ internal protocol JSONSerializer {
      
      - returns: JSON when successful, error otherwise.
      */
-    func serializeDataToJSON(data: NSData?, readingOptions: NSJSONReadingOptions) -> Result<AnyObject>
+    func serializeDataToJSON(data: NSData?, readingOptions: NSJSONReadingOptions) -> Result<JSON>
     
 }

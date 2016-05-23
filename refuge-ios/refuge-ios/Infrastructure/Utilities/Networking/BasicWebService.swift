@@ -96,7 +96,7 @@ internal final class BasicWebService: WebService {
     
     // MARK: WebService
     
-    func executeRequest(request: WebServiceRequest, completion: Result<AnyObject> -> ()) {
+    func executeRequest(request: WebServiceRequest, completion: Result<JSON> -> ()) {
         switch request.method {
         case .GET:
             GET(request.path, parameters: request.parameters, completion: completion)
