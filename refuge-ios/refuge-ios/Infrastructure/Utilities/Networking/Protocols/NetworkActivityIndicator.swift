@@ -22,6 +22,9 @@ import Foundation
 /// Indicates network activity is occurring.
 internal protocol NetworkActivityIndicator {
     
+    /// Whether the network activity indicator is currently running.
+    var isRunning: Bool { get }
+    
     /// Starts indicating activity.
     func start()
     

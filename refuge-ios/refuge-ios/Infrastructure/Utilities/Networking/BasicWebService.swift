@@ -85,6 +85,13 @@ internal final class BasicWebService: WebService {
         self.currentTask = nil
     }
     
+    /// Called on deinitialization.
+    deinit {
+        if networkActivityIndicator.isRunning {
+            networkActivityIndicator.stop()
+        }
+    }
+    
     // MARK: - Protocol conformance
     
     // MARK: WebService

@@ -26,6 +26,10 @@ internal struct BasicNetworkActivityIndicator: NetworkActivityIndicator {
     
     // MARK: NetworkActivityIndicator
     
+    var isRunning: Bool {
+        return UIApplication.sharedApplication().networkActivityIndicatorVisible
+    }
+    
     func start() {
         dispatch_async(dispatch_get_main_queue()) {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
