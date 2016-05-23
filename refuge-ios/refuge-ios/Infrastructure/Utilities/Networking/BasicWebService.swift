@@ -119,12 +119,16 @@ internal final class BasicWebService: WebService {
             return
         }
         
-        networkActivityIndicator.start()
+        if !networkActivityIndicator.isRunning {
+            networkActivityIndicator.start()
+        }
         
         currentTask = session?.dataTaskWithURL(url) {
             [weak self] (data, response, error) in
             
-            self?.networkActivityIndicator.stop()
+            if let networkActivityIndicator = self?.networkActivityIndicator where networkActivityIndicator.isRunning {
+                networkActivityIndicator.stop()
+            }
             
             guard let strongSelf = self else {
                 return
