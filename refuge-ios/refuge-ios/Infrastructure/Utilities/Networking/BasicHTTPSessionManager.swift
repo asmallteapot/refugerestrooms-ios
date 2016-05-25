@@ -70,14 +70,14 @@ internal final class BasicHTTPSessionManager: HTTPSessionManager {
             }
             
             guard let response = response as? NSHTTPURLResponse else {
-                completion(Result(error: WebServiceError.InvalidResponseWithNoError))
+                completion(Result(error: HTTPSessionManagerError.InvalidResponseWithNoError))
                 return
             }
             
             let statusCode = response.statusCode
             
             guard let recognizedStatusCode = HTTPResponse.StatusCode(rawValue: Int(response.statusCode)) else {
-                completion(Result(error: WebServiceError.StatusCodeUnexpected(statusCode: statusCode)))
+                completion(Result(error: HTTPSessionManagerError.StatusCodeUnexpected(statusCode: statusCode)))
                 return
             }
             

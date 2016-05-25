@@ -1,5 +1,5 @@
 //
-//  WebServiceError.swift
+//  HTTPSessionManagerError.swift
 //
 // Copyleft (c) 2016 Refuge Restrooms
 //
@@ -19,11 +19,14 @@
 
 import Foundation
 
-/// Web service error.
-internal enum WebServiceError: ErrorType {
+/// HTTP sessoin manager error.
+internal enum HTTPSessionManagerError: ErrorType {
     
-    /// URL for request is invalid.
-    case InvalidURL(url: String)
+    /// Invalid response for request but no error was indicated.
+    case InvalidResponseWithNoError
+    
+    /// Request returned with unexpected status code.
+    case StatusCodeUnexpected(statusCode: NSInteger)
     
 }
 
@@ -31,23 +34,27 @@ internal enum WebServiceError: ErrorType {
 
 // MARK: CustomErrorConvertible
 
-extension WebServiceError: CustomErrorConvertible {
+extension HTTPSessionManagerError: CustomErrorConvertible {
     
     var code: Int {
         switch self {
-        case .InvalidURL(_):
+        case .InvalidResponseWithNoError:
             return 1
+        case .StatusCodeUnexpected(_):
+            return 2
         }
     }
     
     var subDomain: String {
-        return "webservice"
+        return "httpsessionmanager"
     }
     
     var failureReason: String {
         switch self {
-        case .InvalidURL(let url):
-            return "Invalid URL for web service request: \(url)"
+        case .InvalidResponseWithNoError:
+            return "Invalid web service response but no error indicated."
+        case .StatusCodeUnexpected(let statusCode):
+            return "Web service request completed with unexpected status code: \(statusCode)"
         }
     }
     
