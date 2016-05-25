@@ -19,35 +19,18 @@
 
 import Foundation
 
-/// Basic web service utilizing NSURLSession.
+/// Basic web service.
 internal final class BasicWebService: WebService {
     
     // MARK: - Types
-    
-    /**
-     Session cache type.
-     */
-    enum SessionCacheType {
-        /// Disk-persisted global cache, credential and cookie storage objects.
-        case Disk
-    
-        /// Session-related data is stored in memory. i.e. A “private” session.
-        case Memory
-        
-        private func sessionConfiguration() -> NSURLSessionConfiguration {
-            switch self {
-            case .Disk:
-                return NSURLSessionConfiguration.defaultSessionConfiguration()
-            case .Memory:
-                return NSURLSessionConfiguration.ephemeralSessionConfiguration()
-            }
-        }
-    }
     
     // MARK: - Properties
     
     /// Base URL.
     let baseURL: String
+    
+    /// HTTP session manager.
+    let httpSessionManager: HTTPSessionManager
 
     /// Network activity indicator.
     let networkActivityIndicator: NetworkActivityIndicator
@@ -58,35 +41,33 @@ internal final class BasicWebService: WebService {
     /// URL constructor.
     let urlConstructor: WebServiceURLConstructor
     
-    // MARK: Private properties
-    
-    private var session: NSURLSession?
-    private var currentTask: NSURLSessionDataTask?
-    
     // MARK: - Init/Deinit
-    
+
     /**
      Creates new instance with provided details.
      
      - parameter baseURL:                  Base URL.
+     - parameter httpSessionManager:       HTTP session manager.
      - parameter networkActivityIndicator: Network activity indicator.
      - parameter resultsBuilder:           Results builder.
-     - parameter sessionCacheType:         Session cache type.
      - parameter urlConstructor:           URL constructor.
      
      - returns: New instance.
      */
-    init(baseURL: String, networkActivityIndicator: NetworkActivityIndicator, resultsBuilder: WebServiceResultsBuilder, sessionCacheType: SessionCacheType, urlConstructor: WebServiceURLConstructor) {
+    init(baseURL: String, httpSessionManager: HTTPSessionManager, networkActivityIndicator: NetworkActivityIndicator, resultsBuilder: WebServiceResultsBuilder, urlConstructor: WebServiceURLConstructor) {
         self.baseURL = baseURL
+        self.httpSessionManager = httpSessionManager
         self.networkActivityIndicator = networkActivityIndicator
         self.resultsBuilder = resultsBuilder
         self.urlConstructor = urlConstructor
-        self.session = NSURLSession(configuration: sessionCacheType.sessionConfiguration())
-        self.currentTask = nil
     }
     
     /// Called on deinitialization.
     deinit {
+        if httpSessionManager.isMakingRequest {
+            httpSessionManager.cancelCurrentRequest()
+        }
+        
         if networkActivityIndicator.isRunning {
             networkActivityIndicator.stop()
         }
@@ -107,9 +88,9 @@ internal final class BasicWebService: WebService {
     
     // MARK: Private instance functions
     
-    private func GET(path: String, parameters: [String : AnyObject]?, completion: Result<AnyObject> -> ()) {
-        if currentTask != nil {
-            currentTask?.cancel()
+    private func GET(path: String, parameters: [String : AnyObject]?, completion: Result<JSON> -> ()) {
+        if httpSessionManager.isMakingRequest {
+            httpSessionManager.cancelCurrentRequest()
         }
         
         let urlString = urlConstructor.constructURLWithBase(baseURL, path: path, parameters: parameters)
@@ -123,7 +104,7 @@ internal final class BasicWebService: WebService {
             networkActivityIndicator.start()
         }
         
-        currentTask = session?.dataTaskWithURL(url) {
+        httpSessionManager.makeRequestWithURL(url) {
             [weak self] (data, response, error) in
             
             if let networkActivityIndicator = self?.networkActivityIndicator where networkActivityIndicator.isRunning {
@@ -143,8 +124,6 @@ internal final class BasicWebService: WebService {
                 .flatMap(strongSelf.resultsBuilder.serializeDataToJSON)
             )
         }
-        
-        currentTask?.resume()
     }
     
 }

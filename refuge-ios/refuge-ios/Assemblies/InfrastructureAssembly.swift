@@ -65,6 +65,9 @@ internal protocol ViewControllerAssembly {
 
 /// Assembles utility objects.
 internal protocol UtilityAssembly: WebServiceRequestAssembly {
+
+    /// HTTP session manager.
+    func httpSessionManager() -> HTTPSessionManager
     
     /**
      JSON parser.
@@ -160,6 +163,10 @@ extension AppAssembly {
     
     // MARK: - UtilityAssembly
     
+    func httpSessionManager() -> HTTPSessionManager {
+        return BasicHTTPSessionManager(session: session())
+    }
+    
     func jsonParser() -> JSONParser {
         return BasicJSONParser(jsonTransformer: jsonTransformer())
     }
@@ -179,9 +186,9 @@ extension AppAssembly {
     func webService(baseURL baseURL: String) -> WebService {
         return BasicWebService(
             baseURL: baseURL,
+            httpSessionManager: httpSessionManager(),
             networkActivityIndicator: networkActivityIndicator(),
             resultsBuilder: webServiceResultsBuilder(),
-            sessionCacheType: .Disk,
             urlConstructor: webServiceURLConstructor()
         )
     }
@@ -208,6 +215,19 @@ extension AppAssembly {
     }
     
     // MARK: - Private
+    
+    private func session() -> NSURLSession {
+        return NSURLSession(configuration: sessionConfiguration(shouldSaveToDisk: true))
+    }
+    
+    private func sessionConfiguration(shouldSaveToDisk shouldSaveToDisk: Bool) -> NSURLSessionConfiguration {
+        switch shouldSaveToDisk {
+        case true:
+            return NSURLSessionConfiguration.defaultSessionConfiguration()
+        case false:
+            return NSURLSessionConfiguration.ephemeralSessionConfiguration()
+        }
+    }
     
     private func webServiceParametersConverter() -> WebServiceParametersConverter {
         return BasicWebServiceParametersConverter()
