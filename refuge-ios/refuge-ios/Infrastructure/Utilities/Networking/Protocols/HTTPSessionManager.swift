@@ -32,8 +32,8 @@ internal protocol HTTPSessionManager {
      Makes an HTTP request with the provided URL.
      
      - parameter url: URL for request.
-     - parameter completion: Completion with data and response when successful, error otherwise.
+     - parameter completion: Completion with HTTP response when successful, error otherwise.
      */
-    func makeRequestWithURL(url: NSURL, completion: (NSData?, NSURLResponse?, NSError?) -> ())
+    func makeRequestWithURL(url: NSURL, completion: Result<HTTPResponse> -> ())
     
 }

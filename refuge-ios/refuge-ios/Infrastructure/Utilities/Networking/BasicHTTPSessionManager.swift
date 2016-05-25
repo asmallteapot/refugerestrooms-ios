@@ -60,11 +60,30 @@ internal final class BasicHTTPSessionManager: HTTPSessionManager {
         currentTask?.cancel()
     }
     
-    func makeRequestWithURL(url: NSURL, completion: (NSData?, NSURLResponse?, NSError?) -> ()) {
+    func makeRequestWithURL(url: NSURL, completion: Result<HTTPResponse> -> ()) {
         currentTask = session.dataTaskWithURL(url) {
             (data, response, error) in
             
-            completion(data, response, error)
+            if let error = error {
+                completion(Result(error: error))
+                return
+            }
+            
+            guard let response = response as? NSHTTPURLResponse else {
+                completion(Result(error: WebServiceError.InvalidResponseWithNoError))
+                return
+            }
+            
+            let statusCode = response.statusCode
+            
+            guard let recognizedStatusCode = HTTPResponse.StatusCode(rawValue: Int(response.statusCode)) else {
+                completion(Result(error: WebServiceError.StatusCodeUnexpected(statusCode: statusCode)))
+                return
+            }
+            
+            let httpResponse = HTTPResponse(data: data, statusCode: recognizedStatusCode)
+            
+            completion(Result(value: httpResponse))
         }
         
         currentTask?.resume()

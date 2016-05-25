@@ -105,7 +105,7 @@ internal final class BasicWebService: WebService {
         }
         
         httpSessionManager.makeRequestWithURL(url) {
-            [weak self] (data, response, error) in
+            [weak self] result in
             
             if let networkActivityIndicator = self?.networkActivityIndicator where networkActivityIndicator.isRunning {
                 networkActivityIndicator.stop()
@@ -115,13 +115,8 @@ internal final class BasicWebService: WebService {
                 return
             }
             
-            let result = Result(value: (data: data, response: response, error: error))
-            
             completion(result
-                .flatMap(strongSelf.resultsBuilder.ensureNoError)
-                .flatMap(strongSelf.resultsBuilder.ensureHTTPResponseExists)
-                .flatMap(strongSelf.resultsBuilder.ensureExpectedStatusCode)
-                .flatMap(strongSelf.resultsBuilder.serializeDataToJSON)
+                .flatMap(strongSelf.resultsBuilder.serializeHTTPResponseToJSON)
             )
         }
     }
