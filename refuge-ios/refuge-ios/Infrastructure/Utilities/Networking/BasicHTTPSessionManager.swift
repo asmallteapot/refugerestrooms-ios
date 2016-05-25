@@ -57,7 +57,12 @@ internal final class BasicHTTPSessionManager: HTTPSessionManager {
     }
     
     func cancelCurrentRequest() {
-        currentTask?.cancel()
+        switch currentTask {
+        case .Some(let task):
+            task.cancel()
+        case .None:
+            return
+        }
     }
     
     func makeRequestWithURL(url: NSURL, completion: Result<HTTPResponse> -> ()) {

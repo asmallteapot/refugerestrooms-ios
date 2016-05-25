@@ -32,11 +32,8 @@ internal final class BasicWebService: WebService {
     /// HTTP session manager.
     let httpSessionManager: HTTPSessionManager
     
-    /// JSON reading options.
-    let jsonReadingOptions: NSJSONReadingOptions
-
-    /// JSON serializer.
-    let jsonSerializer: JSONSerializer
+    /// JSON factory.
+    let jsonFactory: JSONFactory
 
     /// Network activity indicator.
     let networkActivityIndicator: NetworkActivityIndicator
@@ -51,18 +48,16 @@ internal final class BasicWebService: WebService {
      
      - parameter baseURL:                  Base URL.
      - parameter httpSessionManager:       HTTP session manager.
-     - parameter jsonReadingOptions:       JSON reading options.
-     - parameter jsonSerializer:           JSON serializer.
+     - parameter jsonFactory:              JSON factory.
      - parameter networkActivityIndicator: Network activity indicator.
      - parameter urlConstructor:           URL constructor.
      
      - returns: New instance.
      */
-    init(baseURL: String, httpSessionManager: HTTPSessionManager, jsonReadingOptions: NSJSONReadingOptions, jsonSerializer: JSONSerializer, networkActivityIndicator: NetworkActivityIndicator, urlConstructor: WebServiceURLConstructor) {
+    init(baseURL: String, httpSessionManager: HTTPSessionManager, jsonFactory: JSONFactory, networkActivityIndicator: NetworkActivityIndicator, urlConstructor: WebServiceURLConstructor) {
         self.baseURL = baseURL
         self.httpSessionManager = httpSessionManager
-        self.jsonReadingOptions = jsonReadingOptions
-        self.jsonSerializer = jsonSerializer
+        self.jsonFactory = jsonFactory
         self.networkActivityIndicator = networkActivityIndicator
         self.urlConstructor = urlConstructor
     }
@@ -116,18 +111,10 @@ internal final class BasicWebService: WebService {
                 networkActivityIndicator.stop()
             }
             
-            guard let strongSelf = self else {
-                return
-            }
-            
             switch result {
             case .Success(let httpResponse):
-                switch httpResponse.statusCode {
-                case .NoContent:
-                    completion(Result(value: NSNull()))
-                case .OK:
-                    completion(strongSelf.jsonSerializer.serializeDataToJSON(httpResponse.data, readingOptions: strongSelf.jsonReadingOptions)
-                    )
+                if let strongSelf = self {
+                    completion(strongSelf.jsonFactory.jsonForHTTPResponse(httpResponse))
                 }
             case .Failure(let error):
                 completion(Result(error: error))

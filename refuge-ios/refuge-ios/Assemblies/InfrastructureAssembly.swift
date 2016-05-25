@@ -77,11 +77,11 @@ internal protocol UtilityAssembly: WebServiceRequestAssembly {
     func jsonParser() -> JSONParser
     
     /**
-     JSON serializer.
+     JSON factory.
      
-     - returns: JSON serializer.
+     - returns: JSON factory.
      */
-    func jsonSerializer() -> JSONSerializer
+    func jsonFactory() -> JSONFactory
 
     /**
      JSON transformer.
@@ -160,12 +160,15 @@ extension AppAssembly {
         return BasicHTTPSessionManager(session: session())
     }
     
-    func jsonParser() -> JSONParser {
-        return BasicJSONParser(jsonTransformer: jsonTransformer())
+    func jsonFactory() -> JSONFactory {
+        return BasicJSONFactory(
+            jsonReadingOptions: .AllowFragments,
+            jsonSerializer: jsonSerializer()
+        )
     }
     
-    func jsonSerializer() -> JSONSerializer {
-        return BasicJSONSerializer()
+    func jsonParser() -> JSONParser {
+        return BasicJSONParser(jsonTransformer: jsonTransformer())
     }
     
     func jsonTransformer() -> JSONTransformer {
@@ -180,8 +183,7 @@ extension AppAssembly {
         return BasicWebService(
             baseURL: baseURL,
             httpSessionManager: httpSessionManager(),
-            jsonReadingOptions: .AllowFragments,
-            jsonSerializer: jsonSerializer(),
+            jsonFactory: jsonFactory(),
             networkActivityIndicator: networkActivityIndicator(),
             urlConstructor: webServiceURLConstructor()
         )
@@ -202,6 +204,10 @@ extension AppAssembly {
     }
     
     // MARK: - Private
+    
+    private func jsonSerializer() -> JSONSerializer {
+        return BasicJSONSerializer()
+    }
     
     private func session() -> NSURLSession {
         return NSURLSession(configuration: sessionConfiguration(shouldSaveToDisk: true))
