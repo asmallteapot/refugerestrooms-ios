@@ -23,15 +23,15 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    /// UI assembly.
-    var uiAssembly: UIAssembly = AppAssembly()
+    /// View controller assembly.
+    var viewControllerAssembly: ViewControllerAssembly = AppAssembly()
     
     /// Root window of appplication.
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        window?.rootViewController = uiAssembly.viewController()
+        window?.rootViewController = viewControllerAssembly.viewController()
         window?.makeKeyAndVisible()
         
         return true
