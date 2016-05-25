@@ -31,12 +31,15 @@ internal final class BasicWebService: WebService {
     
     /// HTTP session manager.
     let httpSessionManager: HTTPSessionManager
+    
+    /// JSON reading options.
+    let jsonReadingOptions: NSJSONReadingOptions
+
+    /// JSON serializer.
+    let jsonSerializer: JSONSerializer
 
     /// Network activity indicator.
     let networkActivityIndicator: NetworkActivityIndicator
-    
-    /// Results builder.
-    let resultsBuilder: WebServiceResultsBuilder
     
     /// URL constructor.
     let urlConstructor: WebServiceURLConstructor
@@ -48,17 +51,19 @@ internal final class BasicWebService: WebService {
      
      - parameter baseURL:                  Base URL.
      - parameter httpSessionManager:       HTTP session manager.
+     - parameter jsonReadingOptions:       JSON reading options.
+     - parameter jsonSerializer:           JSON serializer.
      - parameter networkActivityIndicator: Network activity indicator.
-     - parameter resultsBuilder:           Results builder.
      - parameter urlConstructor:           URL constructor.
      
      - returns: New instance.
      */
-    init(baseURL: String, httpSessionManager: HTTPSessionManager, networkActivityIndicator: NetworkActivityIndicator, resultsBuilder: WebServiceResultsBuilder, urlConstructor: WebServiceURLConstructor) {
+    init(baseURL: String, httpSessionManager: HTTPSessionManager, jsonReadingOptions: NSJSONReadingOptions, jsonSerializer: JSONSerializer, networkActivityIndicator: NetworkActivityIndicator, urlConstructor: WebServiceURLConstructor) {
         self.baseURL = baseURL
         self.httpSessionManager = httpSessionManager
+        self.jsonReadingOptions = jsonReadingOptions
+        self.jsonSerializer = jsonSerializer
         self.networkActivityIndicator = networkActivityIndicator
-        self.resultsBuilder = resultsBuilder
         self.urlConstructor = urlConstructor
     }
     
@@ -115,9 +120,18 @@ internal final class BasicWebService: WebService {
                 return
             }
             
-            completion(result
-                .flatMap(strongSelf.resultsBuilder.serializeHTTPResponseToJSON)
-            )
+            switch result {
+            case .Success(let httpResponse):
+                switch httpResponse.statusCode {
+                case .NoContent:
+                    completion(Result(value: NSNull()))
+                case .OK:
+                    completion(strongSelf.jsonSerializer.serializeDataToJSON(httpResponse.data, readingOptions: strongSelf.jsonReadingOptions)
+                    )
+                }
+            case .Failure(let error):
+                completion(Result(error: error))
+            }
         }
     }
     

@@ -107,13 +107,6 @@ internal protocol UtilityAssembly: WebServiceRequestAssembly {
     func webService(baseURL baseURL: String) -> WebService
     
     /**
-     Web service results builder.
-     
-     - returns: Web service results builder.
-     */
-    func webServiceResultsBuilder() -> WebServiceResultsBuilder
-    
-    /**
      Web service URL constructor.
      
      - returns: Web service URL constructor.
@@ -187,16 +180,10 @@ extension AppAssembly {
         return BasicWebService(
             baseURL: baseURL,
             httpSessionManager: httpSessionManager(),
-            networkActivityIndicator: networkActivityIndicator(),
-            resultsBuilder: webServiceResultsBuilder(),
-            urlConstructor: webServiceURLConstructor()
-        )
-    }
-    
-    func webServiceResultsBuilder() -> WebServiceResultsBuilder {
-        return BasicWebServiceResultsBuilder(
             jsonReadingOptions: .AllowFragments,
-            jsonSerializer: jsonSerializer()
+            jsonSerializer: jsonSerializer(),
+            networkActivityIndicator: networkActivityIndicator(),
+            urlConstructor: webServiceURLConstructor()
         )
     }
     
