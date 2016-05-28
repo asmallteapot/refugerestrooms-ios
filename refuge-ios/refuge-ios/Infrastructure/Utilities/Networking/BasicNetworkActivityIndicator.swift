@@ -31,14 +31,18 @@ internal struct BasicNetworkActivityIndicator: NetworkActivityIndicator {
     }
     
     func start() {
-        dispatch_async(dispatch_get_main_queue()) {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        if !isRunning {
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            }
         }
     }
     
     func stop() {
-        dispatch_async(dispatch_get_main_queue()) {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        if isRunning {
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
         }
     }
     

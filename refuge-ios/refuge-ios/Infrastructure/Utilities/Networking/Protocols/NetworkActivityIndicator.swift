@@ -25,10 +25,10 @@ internal protocol NetworkActivityIndicator {
     /// Whether the network activity indicator is currently running.
     var isRunning: Bool { get }
     
-    /// Starts indicating activity.
+    /// Starts indicating activity if it is not currently running.
     func start()
     
-    /// Stops indicating activity.
+    /// Stops indicating activity if it is currently running.
     func stop()
     
 }

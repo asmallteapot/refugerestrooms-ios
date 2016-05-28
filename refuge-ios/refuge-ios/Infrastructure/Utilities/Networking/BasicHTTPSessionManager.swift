@@ -47,15 +47,6 @@ internal final class BasicHTTPSessionManager: HTTPSessionManager {
     
     // MARK: HTTPSessionManager
     
-    var isMakingRequest: Bool {
-        switch currentTask {
-        case .Some(let task):
-            return task.state == .Running
-        case .None:
-            return false
-        }
-    }
-    
     func cancelCurrentRequest() {
         switch currentTask {
         case .Some(let task):

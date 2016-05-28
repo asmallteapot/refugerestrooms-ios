@@ -22,9 +22,6 @@ import Foundation
 /// HTTP session manager.
 internal protocol HTTPSessionManager {
     
-    /// Whether the session manager is currently making a request.
-    var isMakingRequest: Bool { get }
-    
     /// Cancels current request, if one is being made.
     func cancelCurrentRequest()
     

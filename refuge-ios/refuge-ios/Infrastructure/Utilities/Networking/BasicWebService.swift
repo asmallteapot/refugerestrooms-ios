@@ -64,13 +64,8 @@ internal final class BasicWebService: WebService {
     
     /// Called on deinitialization.
     deinit {
-        if httpSessionManager.isMakingRequest {
-            httpSessionManager.cancelCurrentRequest()
-        }
-        
-        if networkActivityIndicator.isRunning {
-            networkActivityIndicator.stop()
-        }
+        httpSessionManager.cancelCurrentRequest()
+        networkActivityIndicator.stop()
     }
     
     // MARK: - Protocol conformance
@@ -89,9 +84,7 @@ internal final class BasicWebService: WebService {
     // MARK: Private instance functions
     
     private func GET(path: String, parameters: [String : AnyObject]?, completion: Result<JSON> -> ()) {
-        if httpSessionManager.isMakingRequest {
-            httpSessionManager.cancelCurrentRequest()
-        }
+        httpSessionManager.cancelCurrentRequest()
         
         let urlString = urlConstructor.constructURLWithBase(baseURL, path: path, parameters: parameters)
         
@@ -100,16 +93,12 @@ internal final class BasicWebService: WebService {
             return
         }
         
-        if !networkActivityIndicator.isRunning {
-            networkActivityIndicator.start()
-        }
+        networkActivityIndicator.start()
         
         httpSessionManager.makeRequestWithURL(url) {
             [weak self] result in
             
-            if let networkActivityIndicator = self?.networkActivityIndicator where networkActivityIndicator.isRunning {
-                networkActivityIndicator.stop()
-            }
+            self?.networkActivityIndicator.stop()
             
             switch result {
             case .Success(let httpResponse):
