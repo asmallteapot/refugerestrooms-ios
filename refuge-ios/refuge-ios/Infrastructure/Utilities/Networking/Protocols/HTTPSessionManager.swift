@@ -26,11 +26,11 @@ internal protocol HTTPSessionManager {
     func cancelCurrentRequest()
     
     /**
-     Makes an HTTP request with the provided URL.
+     Performs a GET request with the provided URL.
      
      - parameter url: URL for request.
      - parameter completion: Completion with HTTP response when successful, error otherwise.
      */
-    func makeRequestWithURL(url: NSURL, completion: Result<HTTPResponse> -> ())
+    func GET(url: NSURL, completion: Result<HTTPResponse> -> ())
     
 }

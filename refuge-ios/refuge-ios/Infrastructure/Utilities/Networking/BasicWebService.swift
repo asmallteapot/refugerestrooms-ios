@@ -73,29 +73,16 @@ internal final class BasicWebService: WebService {
     // MARK: WebService
     
     func executeRequest(request: WebServiceRequest, completion: Result<JSON> -> ()) {
-        switch request.method {
-        case .GET:
-            GET(request.path, parameters: request.parameters, completion: completion)
-        }
-    }
-    
-    // MARK: - Instance functions
-    
-    // MARK: Private instance functions
-    
-    private func GET(path: String, parameters: [String : AnyObject]?, completion: Result<JSON> -> ()) {
         httpSessionManager.cancelCurrentRequest()
         
-        let urlString = urlConstructor.constructURLWithBase(baseURL, path: path, parameters: parameters)
+        let urlString = urlConstructor.constructURLWithBase(baseURL, path: request.path, parameters: request.parameters)
         
         guard let url = NSURL(string: urlString) else {
             completion(Result(error: WebServiceError.InvalidURL(url: urlString)))
             return
         }
         
-        networkActivityIndicator.start()
-        
-        httpSessionManager.makeRequestWithURL(url) {
+        let completionForRequest: Result<HTTPResponse> -> () = {
             [weak self] result in
             
             self?.networkActivityIndicator.stop()
@@ -108,6 +95,13 @@ internal final class BasicWebService: WebService {
             case .Failure(let error):
                 completion(Result(error: error))
             }
+        }
+        
+        networkActivityIndicator.start()
+        
+        switch request.method {
+        case .GET:
+            httpSessionManager.GET(url, completion: completionForRequest)
         }
     }
     

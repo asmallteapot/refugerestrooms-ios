@@ -36,10 +36,10 @@ internal struct BasicJSONFactory: JSONFactory {
     
     func jsonForHTTPResponse(httpResponse: HTTPResponse) -> Result<JSON> {
         switch httpResponse.statusCode {
-        case .NoContent:
-            return emptyJSON()
         case .OK:
             return jsonFromData(httpResponse.data)
+        case .NoContent:
+            return emptyJSON()
         }
     }
     

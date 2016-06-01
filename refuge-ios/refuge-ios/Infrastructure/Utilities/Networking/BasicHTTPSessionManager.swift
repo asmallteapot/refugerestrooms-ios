@@ -56,7 +56,7 @@ internal final class BasicHTTPSessionManager: HTTPSessionManager {
         }
     }
     
-    func makeRequestWithURL(url: NSURL, completion: Result<HTTPResponse> -> ()) {
+    func GET(url: NSURL, completion: Result<HTTPResponse> -> ()) {
         currentTask = session.dataTaskWithURL(url) {
             (data, response, error) in
             

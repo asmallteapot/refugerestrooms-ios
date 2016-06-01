@@ -16,11 +16,11 @@ internal struct HTTPResponse {
     /// HTTP status code.
     enum StatusCode: Int {
         
-        /// No content (204).
-        case NoContent = 204
-        
         /// OK (200).
         case OK = 200
+        
+        /// No content (204).
+        case NoContent = 204
         
     }
     
