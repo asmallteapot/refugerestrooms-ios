@@ -10,7 +10,7 @@
 
 @interface MockRefugeSearch : RefugeSearch
 
-@ property (nonatomic, strong) NSArray *arrayToReturn;
+@property (nonatomic, strong) NSArray *arrayToReturn;
 @property (nonatomic, strong) NSError *errorToSet;
 
 @end

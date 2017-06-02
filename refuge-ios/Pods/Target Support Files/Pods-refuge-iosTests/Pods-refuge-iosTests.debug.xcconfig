@@ -1,0 +1,8 @@
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/ADClusterMapView" "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking" "$PODS_CONFIGURATION_BUILD_DIR/EAIntroView" "$PODS_CONFIGURATION_BUILD_DIR/HNKGooglePlacesAutocomplete" "$PODS_CONFIGURATION_BUILD_DIR/HNKServerFacade" "$PODS_CONFIGURATION_BUILD_DIR/Mantle" "$PODS_CONFIGURATION_BUILD_DIR/Mixpanel" "$PODS_CONFIGURATION_BUILD_DIR/Reachability" "$PODS_CONFIGURATION_BUILD_DIR/iRate"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/ADClusterMapView/ADClusterMapView.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking/AFNetworking.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/EAIntroView/EAIntroView.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/HNKGooglePlacesAutocomplete/HNKGooglePlacesAutocomplete.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/HNKServerFacade/HNKServerFacade.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Mantle/Mantle.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Mixpanel/Mixpanel.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Reachability/Reachability.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/iRate/iRate.framework/Headers"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods

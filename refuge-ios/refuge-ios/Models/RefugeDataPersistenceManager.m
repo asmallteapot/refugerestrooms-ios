@@ -18,7 +18,7 @@
 
 #import "RefugeDataPersistenceManager.h"
 
-#import <CoreData/CoreData.h>
+@import CoreData;
 #import "RefugeAppDelegate.h"
 #import "RefugeRestroom.h"
 

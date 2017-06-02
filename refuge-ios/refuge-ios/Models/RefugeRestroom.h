@@ -16,11 +16,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
-#import <MTLModel.h>
-#import <MTLJSONAdapter.h>
-#import <MTLManagedObjectAdapter.h>
+@import Mantle;
 
 typedef NS_ENUM(NSInteger, RefugeRestroomRatingType) {
     RefugeRestroomRatingTypeNegative = 0,

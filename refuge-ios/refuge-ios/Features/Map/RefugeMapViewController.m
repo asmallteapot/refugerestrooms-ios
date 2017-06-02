@@ -18,10 +18,10 @@
 
 #import "RefugeMapViewController.h"
 
-#import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
+@import CoreLocation;
+@import MapKit;
 #import "Mixpanel+Refuge.h"
-#import <Reachability/Reachability.h>
+@import Reachability;
 #import "RefugeAppState.h"
 #import "RefugeDataPersistenceManager.h"
 #import "RefugeMap.h"
@@ -355,16 +355,17 @@ static NSString *const kRefugeErrorTextLocationServicesFailiOS7 =
 - (void)promptToAllowLocationServices
 {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    } else // iOS 7
-    {
-        if (status == kCLAuthorizationStatusNotDetermined || status == kCLAuthorizationStatusAuthorized) {
-            [self.locationManager startUpdatingLocation];
-        } else {
+    switch (status) {
+        case kCLAuthorizationStatusDenied:
+        case kCLAuthorizationStatusRestricted:
+        case kCLAuthorizationStatusNotDetermined:
             [self displayAlertForWithMessage:kRefugeErrorTextLocationServicesFailiOS7];
-        }
+            break;
+
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            [self.locationManager startUpdatingLocation];
+            break;
     }
 }
 

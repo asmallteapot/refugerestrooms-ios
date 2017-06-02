@@ -18,8 +18,8 @@
 
 #import "RefugeRestroomManager.h"
 
-#import <CoreData/CoreData.h>
-#import <MTLManagedObjectAdapter.h>
+@import CoreData;
+@import Mantle;
 #import "RefugeDataPersistenceManager.h"
 #import "RefugeRestroom.h"
 #import "RefugeRestroomBuilder.h"

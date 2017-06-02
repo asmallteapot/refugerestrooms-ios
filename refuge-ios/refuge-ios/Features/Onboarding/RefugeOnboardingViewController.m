@@ -18,7 +18,7 @@
 
 #import "RefugeOnboardingViewController.h"
 
-#import <EAIntroView/EAIntroView.h>
+@import EAIntroView;
 #import "UIColor+Refuge.h"
 
 static NSString *const kRefugeSegueNameDismissOnboarding = @"RefugeRestroomDissmissOnboardingSegue";

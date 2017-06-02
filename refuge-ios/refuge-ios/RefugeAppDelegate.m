@@ -19,11 +19,11 @@
 
 #import "RefugeAppDelegate.h"
 
-#import <Crashlytics/Crashlytics.h>
-#import <Fabric/Fabric.h>
-#import <HNKGooglePlacesAutocomplete/HNKGooglePlacesAutocompleteQuery.h>
+@import Crashlytics;
+@import Fabric;
+@import HNKGooglePlacesAutocomplete;
 #import "iRate+Refuge.h"
-#import <Mixpanel.h>
+@import Mixpanel;
 #import "Mixpanel+Refuge.h"
 #import "RefugeAppState.h"
 

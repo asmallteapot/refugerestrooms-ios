@@ -18,8 +18,7 @@
 
 #import "RefugeRestroomCommunicator.h"
 
-#import <AFNetworking.h>
-#import "AFNetworkActivityIndicatorManager.h"
+@import AFNetworking;
 #import "RefugeAppState.h"
 #import "RefugeHTTPSessionManager.h"
 #import "RefugeRestroomCommunicatorDelegate.h"

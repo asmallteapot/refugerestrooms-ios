@@ -16,7 +16,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ADClusterMapView.h"
+@import ADClusterMapView;
 #import "RefugeMapDelegate.h"
 
 @interface RefugeMap : ADClusterMapView <ADClusterMapViewDelegate>

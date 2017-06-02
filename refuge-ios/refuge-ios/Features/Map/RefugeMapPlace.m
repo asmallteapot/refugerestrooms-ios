@@ -19,8 +19,7 @@
 
 #import "RefugeMapPlace.h"
 
-#import "CLPlacemark+HNKAdditions.h"
-#import <HNKGooglePlacesAutocomplete/HNKGooglePlacesAutocomplete.h>
+@import HNKGooglePlacesAutocomplete;
 
 @implementation RefugeMapPlace
 

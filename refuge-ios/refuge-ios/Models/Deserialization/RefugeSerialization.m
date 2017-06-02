@@ -18,7 +18,7 @@
 
 #import "RefugeSerialization.h"
 
-#import "MTLJSONAdapter.h"
+@import Mantle;
 #import "RefugeRestroom.h"
 
 NSString *RefugeSerializationErrorDomain = @"RefugeSerializationErrorDomain";

@@ -18,10 +18,8 @@
 
 #import "RefugeRestroom.h"
 
-#import "MTLJSONAdapter.h"
-#import "MTLValueTransformer.h"
+@import Mantle;
 #import "NSDate+Refuge.h"
-#import "NSValueTransformer+MTLPredefinedTransformerAdditions.h"
 
 @implementation RefugeRestroom
 

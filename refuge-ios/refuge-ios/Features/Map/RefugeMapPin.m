@@ -18,7 +18,7 @@
 
 #import "RefugeMapPin.h"
 
-#import <CoreLocation/CoreLocation.h>
+@import CoreLocation;
 #import "RefugeRestroom.h"
 #import "NSString+Refuge.h"
 

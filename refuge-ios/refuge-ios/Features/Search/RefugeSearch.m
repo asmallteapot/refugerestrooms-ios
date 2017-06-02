@@ -18,9 +18,9 @@
 
 #import "RefugeSearch.h"
 
-#import <CoreLocation/CoreLocation.h>
+@import CoreLocation;
 #import "RefugeMapPlace.h"
-#import <HNKGooglePlacesAutocomplete/HNKGooglePlacesAutocomplete.h>
+@import HNKGooglePlacesAutocomplete;
 
 @interface RefugeSearch ()
 

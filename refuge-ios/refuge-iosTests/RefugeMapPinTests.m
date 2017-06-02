@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Refuge Restrooms. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
+@import UIKit;
+@import XCTest;
 
-#import <CoreLocation/CoreLocation.h>
+@import CoreLocation;
 #import "RefugeMapPin.h"
 #import "RefugeRestroom.h"
 

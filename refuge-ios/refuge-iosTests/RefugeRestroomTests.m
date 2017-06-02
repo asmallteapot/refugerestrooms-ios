@@ -6,11 +6,10 @@
 //  Copyright (c) 2015 Refuge Restrooms. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
+@import UIKit;
+@import XCTest;
 
-#import <MTLJSONAdapter.h>
-#import <MTLManagedObjectAdapter.h>
+@import Mantle;
 #import "NSDate+Refuge.h"
 #import "RefugeRestroom.h"
 

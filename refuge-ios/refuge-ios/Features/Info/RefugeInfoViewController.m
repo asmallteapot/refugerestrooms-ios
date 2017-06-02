@@ -83,7 +83,7 @@ static NSString *const kRefugeTwittetLinkName = @"https://twitter.com/refugerest
 - (void)openLinkWithName:(NSString *)linkName
 {
     NSURL *url = [NSURL URLWithString:linkName];
-    
+
     if (![[UIApplication sharedApplication] openURL:url]) {
         [self reportErrorOpeningLinkWithName:linkName];
     }

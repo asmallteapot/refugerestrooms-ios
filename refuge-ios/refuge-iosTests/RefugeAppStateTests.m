@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Refuge Restrooms. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
+@import UIKit;
+@import XCTest;
 
-#import <objc/runtime.h>
+@import ObjectiveC.runtime;
 #import "MockNSUserDefaults.h"
 #import "RefugeAppState.h"
 

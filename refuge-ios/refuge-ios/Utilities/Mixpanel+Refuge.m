@@ -18,7 +18,7 @@
 
 #import "Mixpanel+Refuge.h"
 
-#import <CoreLocation/CoreLocation.h>
+@import CoreLocation;
 #import "iRate+Refuge.h"
 #import "RefugeMapPin.h"
 #import "RefugeRestroom.h"
