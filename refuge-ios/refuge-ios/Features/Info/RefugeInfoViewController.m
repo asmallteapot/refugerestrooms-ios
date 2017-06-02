@@ -84,9 +84,14 @@ static NSString *const kRefugeTwittetLinkName = @"https://twitter.com/refugerest
 {
     NSURL *url = [NSURL URLWithString:linkName];
 
-    if (![[UIApplication sharedApplication] openURL:url]) {
-        [self reportErrorOpeningLinkWithName:linkName];
-    }
+    __weak __typeof(self) weakSelf = self;
+    [[UIApplication sharedApplication] openURL:url options:@{
+		UIApplicationOpenURLOptionsSourceApplicationKey: @"com.RefugeRestrooms.refuge-ios",
+	} completionHandler:^(BOOL success) {
+        if (!success) {
+            [weakSelf reportErrorOpeningLinkWithName:linkName];
+        }
+    }];
 }
 
 - (void)reportErrorOpeningLinkWithName:(NSString *)linkName

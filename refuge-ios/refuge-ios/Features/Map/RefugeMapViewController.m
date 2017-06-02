@@ -426,13 +426,12 @@ static NSString *const kRefugeErrorTextLocationServicesFailiOS7 =
 
 - (void)displayAlertForWithMessage:(NSString *)message
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-                                          
-    [alert show];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:message preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:dismissAction];
+
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)dismissSearch
