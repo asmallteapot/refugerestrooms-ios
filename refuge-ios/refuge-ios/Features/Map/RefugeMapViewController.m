@@ -87,9 +87,9 @@ static NSString *const kRefugeErrorTextLocationServicesFailiOS7 =
     [self configureRestroomManager];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
 
     if (!self.isSyncComplete) {
         [self promptToAllowLocationServices];
@@ -97,7 +97,7 @@ static NSString *const kRefugeErrorTextLocationServicesFailiOS7 =
         if (self.appState.hasViewedOnboarding == NO) {
             [self displayOnboarding];
         }
-        
+
         self.internetReachability = [Reachability reachabilityWithHostname:kRefugeReachabilityTestURL];
         
         if (self.internetReachability.isReachable) {
