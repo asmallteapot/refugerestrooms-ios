@@ -49,27 +49,22 @@ NSString *RefugeRestroomBuilderErrorDomain = @"RefugeRestroomBuilderErrorDomain"
         [RefugeSerialization deserializeRestroomsFromJSON:jsonArray error:&errorWhileCreatingRestrooms];
         
     if (restrooms == nil || errorWhileCreatingRestrooms) {
-        [self setErrorToReturn:error withUnderlyingError:errorWhileCreatingRestrooms];
-    }
-    
-    return restrooms;
-}
+        NSError *underlyingError = errorWhileCreatingRestrooms ?: nil;
+        if (error != NULL) {
+            NSMutableDictionary *errorInfo = [NSMutableDictionary dictionaryWithCapacity:1];
 
-#pragma mark - Private methods
+            if (underlyingError != nil) {
+                [errorInfo setObject:underlyingError forKey:NSUnderlyingErrorKey];
+            }
 
-- (void)setErrorToReturn:(NSError **)error withUnderlyingError:(NSError *)underlyingError
-{
-    if (error != NULL) {
-        NSMutableDictionary *errorInfo = [NSMutableDictionary dictionaryWithCapacity:1];
-        
-        if (underlyingError != nil) {
-            [errorInfo setObject:underlyingError forKey:NSUnderlyingErrorKey];
+            *error = [NSError errorWithDomain:RefugeRestroomBuilderErrorDomain
+                                         code:RefugeRestroomBuilderDeserializationErrorCode
+                                     userInfo:errorInfo];
         }
-        
-        *error = [NSError errorWithDomain:RefugeRestroomBuilderErrorDomain
-                                     code:RefugeRestroomBuilderDeserializationErrorCode
-                                 userInfo:errorInfo];
+
     }
+
+    return restrooms;
 }
 
 @end

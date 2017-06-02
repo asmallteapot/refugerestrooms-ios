@@ -89,6 +89,8 @@ static NSString *const kRefugeErrorTextLocationServicesFailiOS7 =
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+
     if (!self.isSyncComplete) {
         [self promptToAllowLocationServices];
         
