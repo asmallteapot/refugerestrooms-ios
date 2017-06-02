@@ -1023,9 +1023,9 @@
                         <constraints>
                             <constraint firstItem="YNf-7v-LYA" firstAttribute="height" secondItem="J1p-Qb-QUp" secondAttribute="height" id="95n-6B-Oys"/>
                             <constraint firstItem="YNf-7v-LYA" firstAttribute="height" secondItem="J1p-Qb-QUp" secondAttribute="height" id="9cl-fo-dNw"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="YNf-7v-LYA" secondAttribute="trailing" constant="-16" id="OuZ-va-AbL"/>
+                            <constraint firstAttribute="trailing" secondItem="YNf-7v-LYA" secondAttribute="trailing" id="OuZ-va-AbL"/>
                             <constraint firstItem="YNf-7v-LYA" firstAttribute="top" secondItem="Btn-wa-a94" secondAttribute="bottom" id="WbF-zh-VlT"/>
-                            <constraint firstItem="YNf-7v-LYA" firstAttribute="leading" secondItem="J1p-Qb-QUp" secondAttribute="leadingMargin" constant="-16" id="i6h-Kc-mxn"/>
+                            <constraint firstItem="YNf-7v-LYA" firstAttribute="leading" secondItem="J1p-Qb-QUp" secondAttribute="leading" id="i6h-Kc-mxn"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
