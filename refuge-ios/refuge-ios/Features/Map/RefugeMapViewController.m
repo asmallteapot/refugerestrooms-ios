@@ -358,9 +358,12 @@ static NSString *const kRefugeErrorTextLocationServicesFailiOS7 =
 {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+            [self.locationManager requestWhenInUseAuthorization];
+            break;
+
         case kCLAuthorizationStatusDenied:
         case kCLAuthorizationStatusRestricted:
-        case kCLAuthorizationStatusNotDetermined:
             [self displayAlertForWithMessage:kRefugeErrorTextLocationServicesFailiOS7];
             break;
 
