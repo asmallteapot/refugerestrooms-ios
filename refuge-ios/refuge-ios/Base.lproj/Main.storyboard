@@ -118,12 +118,12 @@
                             <constraint firstAttribute="centerX" secondItem="JBI-kJ-mzV" secondAttribute="centerX" id="1dP-5D-1Jw"/>
                             <constraint firstAttribute="centerX" secondItem="ZNi-N8-Nwa" secondAttribute="centerX" id="6Rh-Sc-asB"/>
                             <constraint firstItem="fFb-8a-ZZ4" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="8Rz-Nq-Sy4"/>
-                            <constraint firstItem="fFb-8a-ZZ4" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="8fH-60-nHn"/>
+                            <constraint firstItem="fFb-8a-ZZ4" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="8fH-60-nHn"/>
                             <constraint firstItem="ZNi-N8-Nwa" firstAttribute="top" secondItem="fFb-8a-ZZ4" secondAttribute="bottom" id="9fS-DE-3vU"/>
                             <constraint firstItem="aop-yh-Fzl" firstAttribute="top" secondItem="ZNi-N8-Nwa" secondAttribute="top" constant="8" id="Bnh-Hy-9xc"/>
                             <constraint firstItem="ZNi-N8-Nwa" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="Ek1-Dv-7qq"/>
                             <constraint firstAttribute="trailing" secondItem="ZNi-N8-Nwa" secondAttribute="trailing" id="Kob-uN-uW8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="fFb-8a-ZZ4" secondAttribute="trailing" constant="-16" id="Ln4-RT-Itl"/>
+                            <constraint firstAttribute="trailing" secondItem="fFb-8a-ZZ4" secondAttribute="trailing" id="Ln4-RT-Itl"/>
                             <constraint firstItem="aop-yh-Fzl" firstAttribute="leading" secondItem="ZNi-N8-Nwa" secondAttribute="leading" constant="8" id="O4E-5e-pfa"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="JBI-kJ-mzV" secondAttribute="bottom" id="OwU-yJ-LK5"/>
                             <constraint firstItem="JBI-kJ-mzV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="Ppb-1l-hHB"/>
@@ -310,7 +310,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="REFUGE indexes and maps unisex and other safe restrooms for transgender, intersex, and gender nonconforming individuals." selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3m2-uT-6NU" userLabel="Summary Text">
-                                        <rect key="frame" x="0.0" y="53" width="351" height="74"/>
+                                        <rect key="frame" x="0.0" y="53" width="351" height="73.5"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="0.25490196079999999" green="0.1960784314" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
@@ -374,7 +374,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="dS7-82-4qu" userLabel="Issues View">
-                                <rect key="frame" x="16" y="183" width="343" height="151"/>
+                                <rect key="frame" x="16" y="183" width="343" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Issues?" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="568" translatesAutoresizingMaskIntoConstraints="NO" id="sdN-J8-wk7" userLabel="Issues Title">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
@@ -383,7 +383,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="Contact REFUGE at http://refugerestrooms.org/contact or submit an issue on Github" translatesAutoresizingMaskIntoConstraints="NO" id="pmj-OK-4H2" userLabel="Issues Text">
-                                        <rect key="frame" x="0.0" y="37" width="343" height="74"/>
+                                        <rect key="frame" x="0.0" y="37" width="343" height="73.5"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="0.25490196079999999" green="0.1960784314" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
@@ -447,7 +447,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tt8-uA-e97" userLabel="Credits View">
+                            <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="tt8-uA-e97" userLabel="Credits View">
                                 <rect key="frame" x="16" y="334" width="343" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Credits" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="568" translatesAutoresizingMaskIntoConstraints="NO" id="FRD-gk-jjl" userLabel="Credits Title">
@@ -962,7 +962,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9U-lV-Rbf" userLabel="Rating View">
-                                        <rect key="frame" x="94" y="145" width="187" height="30"/>
+                                        <rect key="frame" x="94" y="145" width="187.5" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100% POSITIVE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8a-zO-wKM" userLabel="Rating Label">
                                                 <rect key="frame" x="27" y="4" width="134" height="22"/>
